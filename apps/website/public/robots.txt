@@ -1,0 +1,11 @@
+# Bacumi robots policy
+# Last updated: 2026-08-16
+
+User-agent: *
+Allow: /
+
+# Keep crawlable public site content.
+# If private areas are added later, add explicit Disallow rules here.
+
+# Canonical sitemap location
+Sitemap: https://bacumi.com/sitemap.xml
