@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Github, Linkedin } from 'lucide-react';
-import { brand, contacts, navLinks, solutions } from '../content/siteCopy';
+import { brand, contacts, navLinks, productLines } from '../content/siteCopy';
 
 const Footer = () => {
   return (
@@ -16,14 +16,14 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-display text-base font-bold text-slate-900">Solutions</h3>
+            <h3 className="font-display text-base font-bold text-slate-900">Products</h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-600">
               <li>
-                <Link to="/solutions" className="hover:text-primary">
-                  All Solutions
+                <Link to="/products" className="hover:text-primary">
+                  All Products
                 </Link>
               </li>
-              {solutions.map((item) => (
+              {productLines.map((item) => (
                 <li key={item.to}>
                   <Link to={item.to} className="hover:text-primary">
                     {item.title}
@@ -75,8 +75,8 @@ const Footer = () => {
 
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-surface-border pt-6 md:flex-row md:items-center">
           <div className="text-sm text-slate-600">
-            <p>© {new Date().getFullYear()} Bacumi. All rights reserved.</p>
-            <p className="mt-1">Pre-incorporation product project</p>
+            <p>© {new Date().getFullYear()} Bacumi SRL. All rights reserved.</p>
+            <p className="mt-1">Software company based in Romania, European Union</p>
           </div>
           <div className="flex items-center gap-4 text-slate-600">
             <a href={contacts.x} target="_blank" rel="noopener noreferrer" className="hover:text-primary" aria-label="Bacumi on X">

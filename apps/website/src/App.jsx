@@ -17,6 +17,8 @@ import TeamInsightsDocs from './pages/docs/TeamInsightsDocs';
 import ProductCompanyVerify from './pages/ProductCompanyVerify';
 import ProductPulse from './pages/ProductPulse';
 import ProductPulsePro from './pages/ProductPulsePro';
+import BusinessSoftware from './pages/BusinessSoftware';
+import DesktopApps from './pages/DesktopApps';
 import Products from './pages/Products';
 import TermsConditions from './pages/TermsConditions';
 import Trust from './pages/Trust';
@@ -43,7 +45,9 @@ function App() {
         <Route path="/blog" element={<Blog />} />
 
         <Route path="/products" element={<Products />} />
-        <Route path="/solutions" element={<Products />} />
+        <Route path="/solutions" element={<Navigate replace to="/products" />} />
+        <Route path="/products/business-software" element={<BusinessSoftware />} />
+        <Route path="/products/desktop-apps" element={<DesktopApps />} />
         <Route path="/products/pulse" element={<ProductPulse />} />
         <Route path="/products/pr-pulse-pro" element={<ProductPulsePro />} />
         <Route path="/products/company-verify" element={<ProductCompanyVerify />} />

@@ -1,21 +1,21 @@
 import { contacts } from './siteCopy';
 
 export const legalMeta = {
-  privacyLastUpdated: 'August 16, 2026',
-  termsLastUpdated: 'August 16, 2026',
-  gdprLastUpdated: 'August 16, 2026'
+  privacyLastUpdated: 'August 24, 2026',
+  termsLastUpdated: 'August 24, 2026',
+  gdprLastUpdated: 'August 24, 2026'
 };
 
 export const legalEntity = {
-  displayName: 'Bacumi',
-  status: 'Pre-incorporation product project',
+  displayName: 'Bacumi SRL',
+  status: 'Romanian limited liability company',
   contactEmail: contacts.support,
   jurisdiction: 'Romania and applicable European Union law'
 };
 
 export const privacySections = {
   scope:
-    'This interim Privacy Policy describes how the Bacumi pre-incorporation product project handles personal data when you use our website and support channels.',
+    'This Privacy Policy describes how Bacumi SRL handles personal data when you use our website and support channels.',
   dataCategories: [
     'Account and contact data you provide to us, such as name, work email, and organization details.',
     'Service usage metadata needed to operate and support our services, such as request timestamps, feature usage events, and error logs.',

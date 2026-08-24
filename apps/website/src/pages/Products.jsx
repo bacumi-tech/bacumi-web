@@ -1,111 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, ArrowRight, BadgeCheck, Clock } from 'lucide-react';
-import { marketplace, roadmap, solutions } from '../content/siteCopy';
+import { ArrowRight, Building2, Monitor } from 'lucide-react';
+import { productLines } from '../content/siteCopy';
 
-const stageClass = {
-  Live: 'stage-live',
-  'Coming Soon': 'stage-early',
-  'Design Partner': 'stage-preview'
+const icons = {
+  'business-software': Building2,
+  'desktop-apps': Monitor
 };
 
-const SolutionCard = ({ to, title, subtitle, description, stage, track }) => (
-  <Link to={to} className="surface-card block p-6 transition-all hover:-translate-y-0.5 hover:border-primary/50">
-    <div className="mb-4 flex flex-wrap items-center gap-2">
-      <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">{track}</span>
-      <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${stageClass[stage]}`}>{stage}</span>
-    </div>
-    <h3 className="font-display text-2xl font-bold text-slate-900">{title}</h3>
-    <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
-    <p className="mt-4 text-slate-600">{description}</p>
-    <p className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
-      Open solution <ArrowRight size={15} />
-    </p>
-  </Link>
-);
+const Products = () => (
+  <div className="page-shell">
+    <section className="layout-container">
+      <div className="page-header px-6 py-10 md:px-10 md:py-14">
+        <span className="label-chip">Bacumi products</span>
+        <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight md:text-6xl">
+          A clear portfolio for better work outcomes
+        </h1>
+        <p className="mt-5 max-w-3xl text-lg text-slate-600 md:text-xl">
+          One Bacumi brand, with focused software for business workflows and small desktop tools for everyday work.
+        </p>
+      </div>
+    </section>
 
-const Products = () => {
-  return (
-    <div className="page-shell">
-      <section className="layout-container">
-        <div className="page-header px-6 py-10 md:px-10 md:py-14">
-          <div className="grid gap-8 lg:grid-cols-[1.25fr_0.9fr] lg:items-end">
-            <div>
-              <span className="label-chip">Bacumi solutions</span>
-              <h1 className="mt-5 text-4xl font-bold leading-tight md:text-6xl">A clear portfolio for better work outcomes</h1>
-              <p className="mt-5 max-w-3xl text-lg text-slate-600 md:text-xl">
-                Bacumi ships focused products with explicit stage visibility. You can adopt what is live today and plan next steps with confidence.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href={marketplace.publisher} target="_blank" rel="noopener noreferrer" className="btn-primary h-12 px-8 text-sm md:text-base">
-                  View Publisher Profile
-                </a>
-                <Link to="/contact" className="btn-secondary h-12 px-8 text-sm md:text-base">
-                  Talk to Bacumi
-                </Link>
-              </div>
-            </div>
-            <div className="surface-card p-6">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">Flagship today</p>
-              <h2 className="mt-3 font-display text-2xl font-bold">PR Pulse</h2>
-              <p className="mt-3 text-sm text-slate-600">Live pull request operations workspace for Azure DevOps teams.</p>
-              <Link to="/products/pulse" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
-                View PR Pulse <ArrowRight size={15} />
+    <section className="layout-container mt-12">
+      <div className="grid gap-6 lg:grid-cols-2">
+        {productLines.map((line) => {
+          const Icon = icons[line.key];
+          const action = line.key === 'business-software' ? 'Explore business software' : 'Explore desktop apps';
+
+          return (
+            <article key={line.key} className="surface-card p-7 md:p-8">
+              <div className="inline-flex rounded-lg bg-primary/10 p-2 text-primary"><Icon size={22} /></div>
+              <p className="mt-5 text-xs font-bold uppercase tracking-[0.14em] text-primary">{line.eyebrow}</p>
+              <h2 className="mt-2 text-3xl font-bold">{line.title}</h2>
+              <p className="mt-4 text-slate-600">{line.description}</p>
+              <Link to={line.to} className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                {action} <ArrowRight size={16} />
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+            </article>
+          );
+        })}
+      </div>
+    </section>
 
-      <section className="layout-container mt-12">
-        <div className="grid gap-6 md:grid-cols-2">
-          <article className="surface-card p-6">
-            <div className="mb-3 inline-flex rounded-lg bg-primary/10 p-2 text-primary">
-              <Activity size={20} />
-            </div>
-            <h3 className="text-2xl font-bold">Engineering</h3>
-            <p className="mt-3 text-slate-600">PR Pulse is live today. PR Pulse Pro is the bounded next product after the shared foundation milestone.</p>
-          </article>
-          <article className="surface-card p-6">
-            <div className="mb-3 inline-flex rounded-lg bg-accent/15 p-2 text-accent">
-              <BadgeCheck size={20} />
-            </div>
-            <h3 className="text-2xl font-bold">Verification</h3>
-            <p className="mt-3 text-slate-600">Company Verify is a design-partner concept for Romania and VIES workflows built around Excel files.</p>
-          </article>
-        </div>
-      </section>
-
-      <section className="layout-container mt-12">
-        <div className="mb-6">
-          <h2 className="text-3xl font-bold md:text-4xl">Explore current solutions</h2>
-          <p className="mt-2 text-slate-600">Each solution includes transparent stage status and expected adoption path.</p>
-        </div>
-        <div className="grid gap-5 lg:grid-cols-2">
-          {solutions.map((item) => (
-            <SolutionCard key={item.key} {...item} />
-          ))}
-        </div>
-      </section>
-
-      <section className="layout-container mt-12">
-        <div className="section-block p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary">
-                <Clock size={13} /> Roadmap
-              </p>
-              <h3 className="mt-2 text-2xl font-bold">Foundation → PR Pulse Pro → Company Verify</h3>
-              <p className="mt-2 text-slate-600">{roadmap.next}</p>
-            </div>
-            <Link to="/contact" className="btn-primary h-11 px-7 text-sm">
-              Discuss your fit
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+    <section className="layout-container mt-12">
+      <div className="section-block px-6 py-9 text-center md:px-10">
+        <h2 className="text-2xl font-bold md:text-3xl">Built by Bacumi SRL</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+          Products are developed as separate, focused offerings with transparent stages and no bundled complexity.
+        </p>
+      </div>
+    </section>
+  </div>
+);
 
 export default Products;

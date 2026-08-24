@@ -15,6 +15,18 @@ const documentationRoutes = [
 ];
 
 const approvedProducts = ['PR Pulse', 'PR Pulse Pro', 'Company Verify'];
+const plannedDesktopApps = [
+  'Voice Composer',
+  'Screenshot Search',
+  'Audio Inbox',
+  'Clipboard Intelligence',
+  'Semantic File Search',
+  'Workspace Manager',
+  'Developer Scratchpad',
+  'Menu Bar Automations',
+  'Smart File Renamer',
+  'Drop Zone / File Converter'
+];
 const hiddenProducts = ['Bacumi Governance', 'Bacumi FinOps', 'Bacumi Tempo', 'GanttFlow'];
 
 const compatibilityRedirects = [
@@ -71,16 +83,41 @@ describe('approved PR Pulse documentation routes', () => {
 });
 
 describe('approved public product portfolio', () => {
-  it('shows only the approved products on the products page', () => {
+  it('presents business software and desktop apps as separate Bacumi product lines', () => {
     renderApp('/products');
 
-    approvedProducts.forEach((product) => {
-      expect(screen.getAllByText(product).length).toBeGreaterThan(0);
-    });
+    expect(screen.getByRole('heading', { name: 'Bacumi Business Software' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Bacumi Desktop Apps' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /Explore business software/i }).getAttribute('href')).toBe(
+      '/products/business-software'
+    );
+    expect(screen.getByRole('link', { name: /Explore desktop apps/i }).getAttribute('href')).toBe(
+      '/products/desktop-apps'
+    );
+  });
+
+  it('keeps the business software portfolio bounded to approved public products', () => {
+    renderApp('/products/business-software');
+
+    approvedProducts.forEach((product) => expect(screen.getAllByText(product).length).toBeGreaterThan(0));
 
     hiddenProducts.forEach((product) => {
       expect(screen.queryAllByText(product)).toHaveLength(0);
     });
+  });
+
+  it('lists exactly ten planned macOS-first desktop apps without premature availability claims', () => {
+    renderApp('/products/desktop-apps');
+
+    const main = screen.getByRole('main');
+    plannedDesktopApps.forEach((product) => {
+      expect(within(main).getByRole('heading', { name: product })).toBeTruthy();
+    });
+    expect(within(main).getAllByText('Planned')).toHaveLength(10);
+    expect(within(main).getByText(/macOS first/i)).toBeTruthy();
+    expect(within(main).getByText(/individuals and organizations/i)).toBeTruthy();
+    expect(within(main).getByText(/Windows versions may be considered in the future/i)).toBeTruthy();
+    expect(within(main).queryByText(/App Store|Download|Available|Beta|Release date|Pricing/i)).toBeNull();
   });
 });
 
@@ -157,53 +194,51 @@ describe('documentation shell', () => {
 });
 
 describe('global public truth', () => {
-  it('opens the approved three-product Solutions menu without a B2C callout', () => {
+  it('opens the two-line Products menu', () => {
     renderApp('/');
 
-    const solutionsButton = screen.getByRole('button', { name: /Solutions/i });
-    fireEvent.click(solutionsButton, { detail: 1 });
+    const productsButton = screen.getByRole('button', { name: /Products/i });
+    fireEvent.click(productsButton, { detail: 1 });
 
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('true');
+    expect(productsButton.getAttribute('aria-expanded')).toBe('true');
 
-    fireEvent.click(solutionsButton, { detail: 1 });
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(productsButton, { detail: 1 });
+    expect(productsButton.getAttribute('aria-expanded')).toBe('false');
 
-    fireEvent.click(solutionsButton, { detail: 0 });
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('true');
+    fireEvent.click(productsButton, { detail: 0 });
+    expect(productsButton.getAttribute('aria-expanded')).toBe('true');
 
-    fireEvent.click(solutionsButton, { detail: 0 });
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(productsButton, { detail: 0 });
+    expect(productsButton.getAttribute('aria-expanded')).toBe('false');
 
-    fireEvent.mouseEnter(solutionsButton);
-    fireEvent.click(solutionsButton, { detail: 1 });
+    fireEvent.mouseEnter(productsButton);
+    fireEvent.click(productsButton, { detail: 1 });
 
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('true');
-    expect(screen.getByRole('link', { name: /^PR PulseLive Pull Request Operations$/i })).toBeTruthy();
-    expect(screen.getByRole('link', { name: /^PR Pulse ProComing Soon Engineering Flow Intelligence$/i })).toBeTruthy();
-    expect(screen.getByRole('link', { name: /^Company VerifyDesign Partner Romania and VIES Verification$/i })).toBeTruthy();
-    expect(screen.queryByText(/B2C/i)).toBeNull();
+    expect(productsButton.getAttribute('aria-expanded')).toBe('true');
+    expect(screen.getByRole('link', { name: 'Bacumi Business Software For operational workflows' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Bacumi Desktop Apps macOS first' })).toBeTruthy();
 
-    fireEvent.click(solutionsButton, { detail: 1 });
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(productsButton, { detail: 1 });
+    expect(productsButton.getAttribute('aria-expanded')).toBe('false');
 
-    fireEvent.click(solutionsButton, { detail: 1 });
-    fireEvent.click(screen.getByRole('link', { name: /^PR PulseLive Pull Request Operations$/i }));
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(productsButton, { detail: 1 });
+    fireEvent.click(screen.getByRole('link', { name: 'Bacumi Business Software For operational workflows' }));
+    expect(productsButton.getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('consumes hover ownership before a keyboard activation toggles the Solutions menu', () => {
+  it('consumes hover ownership before a keyboard activation toggles the Products menu', () => {
     renderApp('/');
 
-    const solutionsButton = screen.getByRole('button', { name: /Solutions/i });
-    fireEvent.mouseEnter(solutionsButton);
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('true');
+    const productsButton = screen.getByRole('button', { name: /Products/i });
+    fireEvent.mouseEnter(productsButton);
+    expect(productsButton.getAttribute('aria-expanded')).toBe('true');
 
-    solutionsButton.focus();
-    fireEvent.click(solutionsButton, { detail: 0 });
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('true');
+    productsButton.focus();
+    fireEvent.click(productsButton, { detail: 0 });
+    expect(productsButton.getAttribute('aria-expanded')).toBe('true');
 
-    fireEvent.click(solutionsButton, { detail: 0 });
-    expect(solutionsButton.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(productsButton, { detail: 0 });
+    expect(productsButton.getAttribute('aria-expanded')).toBe('false');
   });
 
   it('uses the canonical PR Pulse documentation route in global navigation', () => {
@@ -217,12 +252,11 @@ describe('global public truth', () => {
     });
   });
 
-  it('identifies the footer as a pre-incorporation Bacumi project', () => {
+  it('identifies Bacumi SRL as the legal owner in the footer', () => {
     renderApp('/');
 
-    expect(screen.getByText(`© ${new Date().getFullYear()} Bacumi. All rights reserved.`)).toBeTruthy();
-    expect(screen.getByText('Pre-incorporation product project')).toBeTruthy();
-    expect(screen.queryByText(/Bacumi SRL/i)).toBeNull();
+    expect(screen.getByText(`© ${new Date().getFullYear()} Bacumi SRL. All rights reserved.`)).toBeTruthy();
+    expect(screen.getByText('Software company based in Romania, European Union')).toBeTruthy();
   });
 
   it('uses the canonical Trust Center route throughout the footer', () => {
@@ -237,15 +271,11 @@ describe('global public truth', () => {
     });
   });
 
-  it('publishes the interim privacy identity and controller update gate', () => {
+  it('publishes Bacumi SRL as the privacy controller without inventing registration details', () => {
     renderApp('/legal/privacy');
 
-    expect(screen.getByText(/Bacumi is a pre-incorporation product project operated from Romania/i)).toBeTruthy();
+    expect(screen.getByText(/Bacumi SRL is the data controller for this website/i)).toBeTruthy();
     expect(screen.getAllByRole('link', { name: 'support@bacumi.com' }).length).toBeGreaterThan(0);
-    expect(
-      screen.getByText(
-        /legal and controller details will be updated at incorporation and before server-side customer-data collection or commercial contracting/i
-      )
-    ).toBeTruthy();
+    expect(screen.queryByText(/pre-incorporation|updated at incorporation/i)).toBeNull();
   });
 });

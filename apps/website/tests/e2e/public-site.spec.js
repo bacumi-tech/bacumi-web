@@ -2,6 +2,8 @@ import { expect, test } from '@playwright/test';
 
 const canonicalRoutes = [
   { path: '/products', heading: 'A clear portfolio for better work outcomes' },
+  { path: '/products/business-software', heading: 'Bacumi Business Software' },
+  { path: '/products/desktop-apps', heading: 'Bacumi Desktop Apps' },
   { path: '/products/pulse', heading: /PR Pulse/ },
   { path: '/products/pr-pulse-pro', heading: 'PR Pulse Pro' },
   { path: '/products/company-verify', heading: 'Company Verify' },
@@ -98,7 +100,7 @@ test('the PR Pulse compatibility alias replaces itself with the canonical route'
   expectNoPageErrors(pageErrors);
 });
 
-test('desktop Solutions navigation preserves hover ownership for keyboard activation', async ({
+test('desktop Products navigation preserves hover ownership for keyboard activation', async ({
   page,
   isMobile
 }) => {
@@ -109,36 +111,37 @@ test('desktop Solutions navigation preserves hover ownership for keyboard activa
   expect(homeResponse?.ok()).toBe(true);
 
   const homeLink = page.getByRole('banner').getByRole('link', { name: 'Bacumi home' });
-  const solutionsButton = page.getByRole('button', { name: 'Solutions', exact: true });
-  const prPulseLink = page.getByRole('link', {
-    name: /^PR Pulse\s+Live\s+Pull Request Operations$/i
+  const productsButton = page.getByRole('button', { name: 'Products', exact: true });
+  const businessSoftwareLink = page.getByRole('link', {
+    name: 'Bacumi Business Software For operational workflows',
+    exact: true
   });
 
-  await solutionsButton.hover();
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'true');
-  await expect(prPulseLink).toBeVisible();
+  await productsButton.hover();
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'true');
+  await expect(businessSoftwareLink).toBeVisible();
 
-  await solutionsButton.focus();
+  await productsButton.focus();
   await page.keyboard.press('Enter');
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'true');
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'true');
   await page.keyboard.press('Enter');
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'false');
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'false');
 
   await homeLink.hover();
-  await solutionsButton.hover();
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'true');
+  await productsButton.hover();
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'true');
 
-  await solutionsButton.focus();
+  await productsButton.focus();
   await page.keyboard.press('Space');
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'true');
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'true');
   await page.keyboard.press('Space');
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'false');
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'false');
 
-  await solutionsButton.press('Enter');
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'true');
-  await prPulseLink.click();
-  await expect(page).toHaveURL(/\/products\/pulse$/);
-  await expect(solutionsButton).toHaveAttribute('aria-expanded', 'false');
+  await productsButton.press('Enter');
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'true');
+  await businessSoftwareLink.click();
+  await expect(page).toHaveURL(/\/products\/business-software$/);
+  await expect(productsButton).toHaveAttribute('aria-expanded', 'false');
   expectNoPageErrors(pageErrors);
 });
 

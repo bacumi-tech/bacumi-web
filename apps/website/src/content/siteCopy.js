@@ -1,12 +1,31 @@
 export const brand = {
   name: 'Bacumi',
   promise: 'Work better, perform better.',
-  heroTitle: 'Focused software for clearer business workflows.',
+  heroTitle: 'Focused software for people and organizations.',
   heroSubtitle:
-    'Bacumi builds practical products for engineering operations and business verification, starting with PR Pulse for Azure DevOps.',
+    'Bacumi builds practical business software and focused desktop apps, starting with PR Pulse for Azure DevOps.',
   companySummary:
-    'Bacumi builds practical software that helps teams improve execution, visibility, and decision clarity.'
+    'Bacumi SRL builds practical software that helps people and organizations work with greater clarity.'
 };
+
+export const productLines = [
+  {
+    key: 'business-software',
+    to: '/products/business-software',
+    title: 'Bacumi Business Software',
+    eyebrow: 'For operational workflows',
+    description:
+      'Focused products for engineering operations and business verification, with explicit delivery stages.'
+  },
+  {
+    key: 'desktop-apps',
+    to: '/products/desktop-apps',
+    title: 'Bacumi Desktop Apps',
+    eyebrow: 'macOS first',
+    description:
+      'Ten small, practical applications planned for individuals and organizations, each kept deliberately focused.'
+  }
+];
 
 export const solutionTracks = [
   {
@@ -59,9 +78,62 @@ export const solutions = [
   }
 ];
 
+export const desktopApps = [
+  {
+    key: 'voice-composer',
+    title: 'Voice Composer',
+    description: 'Turn spoken thoughts into structured, editable text on your Mac.'
+  },
+  {
+    key: 'screenshot-search',
+    title: 'Screenshot Search',
+    description: 'Find screenshots by their visual content and the text they contain.'
+  },
+  {
+    key: 'audio-inbox',
+    title: 'Audio Inbox',
+    description: 'Capture, organize, and process short voice notes in one focused workspace.'
+  },
+  {
+    key: 'clipboard-intelligence',
+    title: 'Clipboard Intelligence',
+    description: 'Organize clipboard history and make frequently reused content easier to find.'
+  },
+  {
+    key: 'semantic-file-search',
+    title: 'Semantic File Search',
+    description: 'Search local files by meaning when exact filenames and keywords are not enough.'
+  },
+  {
+    key: 'workspace-manager',
+    title: 'Workspace Manager',
+    description: 'Open and manage repeatable project workspaces with less setup friction.'
+  },
+  {
+    key: 'developer-scratchpad',
+    title: 'Developer Scratchpad',
+    description: 'Keep temporary code, commands, notes, and transformations close at hand.'
+  },
+  {
+    key: 'menu-bar-automations',
+    title: 'Menu Bar Automations',
+    description: 'Run small, repeatable local workflows directly from the macOS menu bar.'
+  },
+  {
+    key: 'smart-file-renamer',
+    title: 'Smart File Renamer',
+    description: 'Preview and apply consistent names to groups of local files.'
+  },
+  {
+    key: 'drop-zone-file-converter',
+    title: 'Drop Zone / File Converter',
+    description: 'Convert common file formats through a simple drag-and-drop workflow.'
+  }
+];
+
 export const navLinks = {
   main: [
-    { to: '/solutions', label: 'Solutions' },
+    { to: '/products', label: 'Products' },
     { to: '/pricing', label: 'Pricing' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' }
@@ -84,7 +156,7 @@ export const contacts = {
   sales: 'sales@bacumi.com',
   location: 'Romania, European Union',
   linkedin: 'https://www.linkedin.com/company/bacumi',
-  github: 'https://github.com/bacumicom',
+  github: 'https://github.com/bacumi-tech',
   x: 'https://x.com/bacumicom'
 };
 

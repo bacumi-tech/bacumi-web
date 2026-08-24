@@ -15,13 +15,13 @@ const PrivacyPolicy = () => {
       <section className="layout-container mt-8 max-w-4xl">
         <div className="section-block legal-prose space-y-8 px-6 py-8 md:px-10">
           <div>
-            <h2 className="text-2xl font-bold">1. Interim privacy contact</h2>
+            <h2 className="text-2xl font-bold">1. Data controller and privacy contact</h2>
             <p className="mt-3 text-slate-700">
-              {legalEntity.displayName} is a {legalEntity.status.toLowerCase()} operated from Romania. Privacy requests can be sent to{' '}
+              {legalEntity.displayName} is the data controller for this website and operates from Romania. Privacy requests can be sent to{' '}
               <a href={`mailto:${legalEntity.contactEmail}`} className="text-primary font-semibold">{legalEntity.contactEmail}</a>.
             </p>
             <p className="mt-3 text-slate-700">
-              Interim notice, subject to legal review: legal and controller details will be updated at incorporation and before server-side customer-data collection or commercial contracting. Publishing this page does not by itself complete GDPR, controller, or contracting readiness.
+              Product-specific processing, hosting, and contractual details are provided where applicable. Publishing this page does not by itself represent a certification or replace product-specific agreements.
             </p>
           </div>
 
