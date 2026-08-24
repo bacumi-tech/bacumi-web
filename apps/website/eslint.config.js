@@ -3,6 +3,7 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
+import nxPlugin from '@nx/eslint-plugin';
 
 export default [
   { ignores: ['dist'] },
@@ -13,6 +14,7 @@ export default [
       react: reactPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      '@nx': nxPlugin,
     },
     languageOptions: {
       ecmaVersion: 'latest',
@@ -36,6 +38,13 @@ export default [
       'no-unused-vars': 'off',
       'react/no-unescaped-entities': 'off',
       'react/no-unknown-property': 'off',
+      '@nx/enforce-module-boundaries': ['error', {
+        enforceBuildableLibDependency: true,
+        allow: [],
+        depConstraints: [
+          { sourceTag: 'type:app', onlyDependOnLibsWithTags: ['type:lib'] },
+        ],
+      }],
     },
   },
 ];
