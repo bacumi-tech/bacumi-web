@@ -18,6 +18,43 @@ describe('Bacumi public brand assets', () => {
     }
   });
 
+  it('ships correctly sized base icons and no legacy public logos', () => {
+    for (const [filename, expectedSize] of [
+      ['apple-touch-icon.png', 180],
+      ['icon-192.png', 192],
+      ['icon-512.png', 512]
+    ]) {
+      const bytes = readFileSync(resolve('public', filename));
+      expect(bytes.toString('ascii', 1, 4)).toBe('PNG');
+      expect(bytes.readUInt32BE(16), `${filename} width`).toBe(expectedSize);
+      expect(bytes.readUInt32BE(20), `${filename} height`).toBe(expectedSize);
+    }
+
+    for (const obsoletePath of [
+      'images/logo.png',
+      'images/bacumi-square-logo.png',
+      'images/bacumi_pulse/logo.png'
+    ]) {
+      expect(existsSync(resolve('public', obsoletePath)), obsoletePath).toBe(false);
+    }
+  });
+
+  it('uses the canonical mark in the manifest and favicon', () => {
+    const manifest = JSON.parse(readFileSync(resolve('public/site.webmanifest'), 'utf8'));
+    expect(manifest.theme_color).toBe('#0B132B');
+    expect(manifest.background_color).toBe('#F5F7F9');
+    expect(manifest.icons).toEqual([
+      { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png' }
+    ]);
+
+    const favicon = readFileSync(resolve('public/favicon.svg'), 'utf8');
+    expect(favicon).toContain('Bacumi brand mark');
+    expect(favicon).toContain('#0D6E8A');
+    expect(favicon).toContain('#0B132B');
+    expect(favicon).toContain('#C7CCD3');
+  });
+
   it('declares the favicon, manifest, social preview and approved theme color', () => {
     const html = readFileSync(resolve('index.html'), 'utf8');
 
