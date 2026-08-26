@@ -127,8 +127,9 @@ describe('approved public product portfolio', () => {
     const detailsButton = within(voiceComposerArticle).getByRole('button', { name: /Details/i });
     fireEvent.click(detailsButton);
 
-    // After clicking details, card expands horizontally (col-span-2), vertically, and shows Mac App Store button
+    // After clicking details, card expands 2x2 (col-span-2 and row-span-2), vertically, and shows Mac App Store button
     expect(voiceComposerArticle.className).toContain('md:col-span-2');
+    expect(voiceComposerArticle.className).toContain('md:row-span-2');
     expect(within(voiceComposerArticle).getByText(/Fast, local-first dictation utility/i)).toBeTruthy();
     expect(within(voiceComposerArticle).getByText('Mac App Store')).toBeTruthy();
     expect(within(voiceComposerArticle).getByRole('button', { name: /Less details/i })).toBeTruthy();

@@ -28,16 +28,16 @@ const DesktopApps = () => {
       </section>
 
       <section className="layout-container mt-12">
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-dense items-start">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-dense">
           {desktopApps.map((app) => {
             const isExpanded = expandedKey === app.key;
 
             return (
               <article
                 key={app.key}
-                className={`surface-card p-6 md:p-7 transition-all duration-300 flex flex-col justify-between ${
+                className={`surface-card p-6 md:p-7 transition-all duration-300 flex flex-col justify-between h-full ${
                   isExpanded
-                    ? 'col-span-1 md:col-span-2 lg:col-span-2 border-primary/50 shadow-xl ring-2 ring-primary/15 bg-surface'
+                    ? 'col-span-1 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 border-primary/50 shadow-xl ring-2 ring-primary/15 bg-surface'
                     : 'col-span-1'
                 }`}
               >
@@ -91,7 +91,7 @@ const DesktopApps = () => {
                               href={app.appStoreUrl && app.appStoreUrl !== '#' ? app.appStoreUrl : 'https://apps.apple.com'}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-3 rounded-xl bg-[#0B132B] px-5 py-3 text-white transition-all hover:bg-slate-800 shadow-md hover:shadow-lg"
+                              className="inline-flex items-center gap-3 rounded-xl bg-[#0B132B] px-5 py-3 !text-white transition-all hover:bg-slate-800 shadow-md hover:shadow-lg"
                               aria-label={`View ${app.title} on the Mac App Store`}
                             >
                               <AppleIcon className="h-6 w-6 text-white shrink-0" />
@@ -99,7 +99,7 @@ const DesktopApps = () => {
                                 <span className="block text-[10px] uppercase font-medium tracking-wider text-slate-300 leading-tight">
                                   Coming Soon on the
                                 </span>
-                                <span className="block text-sm font-bold leading-tight tracking-tight">
+                                <span className="block text-sm font-bold leading-tight tracking-tight text-white">
                                   Mac App Store
                                 </span>
                               </div>
