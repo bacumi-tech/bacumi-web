@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link to="/" aria-label="Bacumi home">
-              <img src="/images/logo.png" alt="Bacumi" className="h-10 w-auto object-contain" />
+              <img src="/brand/bacumi-lockup.svg" alt="Bacumi" className="h-10 w-auto object-contain" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-slate-600">{brand.companySummary}</p>
           </div>

@@ -43,7 +43,7 @@ const Navbar = () => {
     >
       <div className="layout-container flex h-16 items-center justify-between">
         <Link to="/" aria-label="Bacumi home">
-          <img src="/images/logo.png" alt="Bacumi" className="h-9 w-auto object-contain md:h-10" />
+          <img src="/brand/bacumi-lockup.svg" alt="Bacumi" className="h-9 w-auto object-contain md:h-10" />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
