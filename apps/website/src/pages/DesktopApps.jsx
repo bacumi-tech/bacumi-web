@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { CheckCircle2, ChevronDown, Monitor, Sparkles, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Activity, ArrowRight, CheckCircle2, ChevronDown, Clock, Laptop, Mic, Sparkles, X } from 'lucide-react';
 import { desktopApps } from '../content/siteCopy';
+
+const stageClass = {
+  Live: 'stage-live',
+  'Coming Soon': 'stage-early',
+  'Design Partner': 'stage-preview'
+};
 
 const AppleIcon = ({ className = 'w-5 h-5' }) => (
   <svg className={className} viewBox="0 0 170 170" fill="currentColor" aria-hidden="true">
@@ -19,15 +26,73 @@ const DesktopApps = () => {
     <div className="page-shell">
       <section className="layout-container">
         <div className="page-header px-6 py-10 md:px-10 md:py-14">
-          <span className="label-chip">Bacumi product line · macOS first</span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight md:text-6xl">Bacumi Desktop Apps</h1>
-          <p className="mt-5 max-w-3xl text-lg text-slate-600 md:text-xl">
-            Ten small, practical apps coming soon for individuals and organizations that want focused tools without unnecessary complexity.
-          </p>
+          <div className="grid gap-8 lg:grid-cols-[1.25fr_0.9fr] lg:items-end">
+            <div>
+              <span className="label-chip">Bacumi product line · macOS first</span>
+              <h1 className="mt-5 text-4xl font-bold leading-tight md:text-6xl">Bacumi Desktop Apps</h1>
+              <p className="mt-5 max-w-3xl text-lg text-slate-600 md:text-xl">
+                Ten small, practical apps coming soon for individuals and organizations that want focused tools without unnecessary complexity.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href="#explore-apps" className="btn-primary h-12 px-8 text-sm md:text-base">
+                  Explore Desktop Apps
+                </a>
+                <Link to="/contact" className="btn-secondary h-12 px-8 text-sm md:text-base">
+                  Talk to Bacumi
+                </Link>
+              </div>
+            </div>
+            <div className="surface-card p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">Featured macOS utility</p>
+              <h2 className="mt-3 font-display text-2xl font-bold">Voice Composer</h2>
+              <p className="mt-3 text-sm text-slate-600">
+                Local-first dictation utility converting speech into structured text on your Mac using embedded Whisper.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  toggleCard('voice-composer');
+                  const el = document.getElementById('explore-apps');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-hover transition-colors"
+              >
+                View Voice Composer <ArrowRight size={15} />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="layout-container mt-12">
+        <div className="grid gap-6 md:grid-cols-2">
+          <article className="surface-card p-6">
+            <div className="mb-3 inline-flex rounded-lg bg-primary/10 p-2 text-primary">
+              <Mic size={20} />
+            </div>
+            <h2 className="text-2xl font-bold">Local-First Intelligence</h2>
+            <p className="mt-3 text-slate-600">
+              Voice dictation, screenshot OCR retrieval, and semantic file search running entirely on-device with zero cloud telemetry.
+            </p>
+          </article>
+          <article className="surface-card p-6">
+            <div className="mb-3 inline-flex rounded-lg bg-accent/15 p-2 text-accent">
+              <Laptop size={20} />
+            </div>
+            <h2 className="text-2xl font-bold">Focused Productivity</h2>
+            <p className="mt-3 text-slate-600">
+              Lightweight utilities for clipboard management, workspace orchestration, file transformations, and menu bar shortcuts.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="layout-container mt-12" id="explore-apps">
+        <div className="mb-6">
+          <h2 className="text-3xl font-bold md:text-4xl">Explore desktop apps</h2>
+          <p className="mt-2 text-slate-600">Only products approved for public presentation are listed here.</p>
+        </div>
+
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-dense">
           {desktopApps.map((app) => {
             const isExpanded = expandedKey === app.key;
@@ -43,13 +108,13 @@ const DesktopApps = () => {
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="inline-flex rounded-lg bg-primary/10 p-2.5 text-primary">
-                        <Monitor size={22} />
-                      </div>
-                      <div>
-                        <span className="stage-early rounded-full px-2.5 py-0.5 text-[11px] font-bold">Coming Soon</span>
-                      </div>
+                    <div className="mb-4 flex flex-wrap items-center gap-2">
+                      <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">
+                        {app.track}
+                      </span>
+                      <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${stageClass[app.stage] || 'stage-early'}`}>
+                        {app.stage}
+                      </span>
                     </div>
 
                     {isExpanded && (
@@ -64,10 +129,11 @@ const DesktopApps = () => {
                     )}
                   </div>
 
-                  <h2 className={`font-display font-bold text-slate-900 ${isExpanded ? 'mt-4 text-2xl md:text-3xl' : 'mt-5 text-2xl'}`}>
+                  <h2 className={`font-display font-bold text-slate-900 ${isExpanded ? 'mt-2 text-2xl md:text-3xl' : 'mt-2 text-2xl'}`}>
                     {app.title}
                   </h2>
-                  <p className="mt-3 text-slate-600 leading-relaxed">{app.description}</p>
+                  <p className="mt-1 text-sm text-slate-500">{app.subtitle}</p>
+                  <p className="mt-4 text-slate-600 leading-relaxed">{app.description}</p>
 
                   {isExpanded && (
                     <div id={`details-${app.key}`} className="mt-6 pt-5 border-t border-slate-200/80">
@@ -164,11 +230,11 @@ const DesktopApps = () => {
 
       <section className="layout-container mt-12">
         <div className="section-block p-6 md:p-8">
-          <div className="inline-flex rounded-lg bg-accent/15 p-2 text-accent">
-            <Sparkles size={20} />
-          </div>
-          <h2 className="mt-4 text-2xl font-bold">Platform direction</h2>
-          <p className="mt-3 max-w-3xl text-slate-600">
+          <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary">
+            <Clock size={13} /> Platform direction
+          </p>
+          <h2 className="mt-2 text-2xl font-bold">macOS First → Apple Silicon Native</h2>
+          <p className="mt-2 text-slate-600">
             Development starts with macOS. Windows versions may be considered in the future, but they are not currently offered or promised.
           </p>
         </div>
