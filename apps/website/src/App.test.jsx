@@ -106,18 +106,38 @@ describe('approved public product portfolio', () => {
     });
   });
 
-  it('lists exactly ten planned macOS-first desktop apps without premature availability claims', () => {
+  it('lists ten macOS-first desktop apps with Coming Soon status and interactive details toggle', () => {
     renderApp('/products/desktop-apps');
 
     const main = screen.getByRole('main');
     plannedDesktopApps.forEach((product) => {
       expect(within(main).getByRole('heading', { name: product })).toBeTruthy();
     });
-    expect(within(main).getAllByText('Planned')).toHaveLength(10);
+    expect(within(main).getAllByText('Coming Soon')).toHaveLength(10);
     expect(within(main).getByText(/macOS first/i)).toBeTruthy();
     expect(within(main).getByText(/individuals and organizations/i)).toBeTruthy();
     expect(within(main).getByText(/Windows versions may be considered in the future/i)).toBeTruthy();
-    expect(within(main).queryByText(/App Store|Download|Available|Beta|Release date|Pricing/i)).toBeNull();
+
+    // Before clicking details, extended App Store button is not visible and card is 1 column
+    expect(within(main).queryByText('Mac App Store')).toBeNull();
+    const voiceComposerArticle = within(main).getByRole('heading', { name: 'Voice Composer' }).closest('article');
+    expect(voiceComposerArticle.className).toContain('col-span-1');
+
+    // Click Details on Voice Composer
+    const detailsButton = within(voiceComposerArticle).getByRole('button', { name: /Details/i });
+    fireEvent.click(detailsButton);
+
+    // After clicking details, card expands 2x2 (col-span-2 and row-span-2), vertically, and shows Mac App Store button
+    expect(voiceComposerArticle.className).toContain('md:col-span-2');
+    expect(voiceComposerArticle.className).toContain('md:row-span-2');
+    expect(within(voiceComposerArticle).getByText(/Fast, local-first dictation utility/i)).toBeTruthy();
+    expect(within(voiceComposerArticle).getByText('Mac App Store')).toBeTruthy();
+    expect(within(voiceComposerArticle).getByRole('button', { name: /Less details/i })).toBeTruthy();
+
+    // Click Less details to collapse
+    fireEvent.click(within(voiceComposerArticle).getByRole('button', { name: /Less details/i }));
+    expect(within(voiceComposerArticle).queryByText('Mac App Store')).toBeNull();
+    expect(voiceComposerArticle.className).toContain('col-span-1');
   });
 });
 
