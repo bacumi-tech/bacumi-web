@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle2, ChevronDown, Monitor, Sparkles } from 'lucide-react';
+import { CheckCircle2, ChevronDown, Monitor, Sparkles, X } from 'lucide-react';
 import { desktopApps } from '../content/siteCopy';
 
 const AppleIcon = ({ className = 'w-5 h-5' }) => (
@@ -9,18 +9,10 @@ const AppleIcon = ({ className = 'w-5 h-5' }) => (
 );
 
 const DesktopApps = () => {
-  const [expandedKeys, setExpandedKeys] = useState(new Set());
+  const [expandedKey, setExpandedKey] = useState(null);
 
   const toggleCard = (key) => {
-    setExpandedKeys((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) {
-        next.delete(key);
-      } else {
-        next.add(key);
-      }
-      return next;
-    });
+    setExpandedKey((prev) => (prev === key ? null : key));
   };
 
   return (
@@ -36,82 +28,133 @@ const DesktopApps = () => {
       </section>
 
       <section className="layout-container mt-12">
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 items-start">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-dense items-start">
           {desktopApps.map((app) => {
-            const isExpanded = expandedKeys.has(app.key);
+            const isExpanded = expandedKey === app.key;
 
             return (
               <article
                 key={app.key}
-                className={`surface-card p-6 transition-all duration-200 flex flex-col justify-between ${
-                  isExpanded ? 'border-primary/50 shadow-md ring-1 ring-primary/20' : ''
+                className={`surface-card p-6 md:p-7 transition-all duration-300 flex flex-col justify-between ${
+                  isExpanded
+                    ? 'col-span-1 md:col-span-2 lg:col-span-2 border-primary/50 shadow-xl ring-2 ring-primary/15 bg-surface'
+                    : 'col-span-1'
                 }`}
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
-                    <div className="inline-flex rounded-lg bg-primary/10 p-2 text-primary">
-                      <Monitor size={20} />
+                    <div className="flex items-center gap-3">
+                      <div className="inline-flex rounded-lg bg-primary/10 p-2.5 text-primary">
+                        <Monitor size={22} />
+                      </div>
+                      <div>
+                        <span className="stage-early rounded-full px-2.5 py-0.5 text-[11px] font-bold">Coming Soon</span>
+                      </div>
                     </div>
-                    <span className="stage-early rounded-full px-2.5 py-1 text-[11px] font-bold">Coming Soon</span>
+
+                    {isExpanded && (
+                      <button
+                        type="button"
+                        onClick={() => toggleCard(app.key)}
+                        className="rounded-lg p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        aria-label={`Close ${app.title} details`}
+                      >
+                        <X size={18} />
+                      </button>
+                    )}
                   </div>
 
-                  <h2 className="mt-5 text-2xl font-bold">{app.title}</h2>
+                  <h2 className={`font-display font-bold text-slate-900 ${isExpanded ? 'mt-4 text-2xl md:text-3xl' : 'mt-5 text-2xl'}`}>
+                    {app.title}
+                  </h2>
                   <p className="mt-3 text-slate-600 leading-relaxed">{app.description}</p>
 
                   {isExpanded && (
-                    <div id={`details-${app.key}`} className="mt-5 pt-4 border-t border-slate-100">
-                      <p className="text-sm leading-relaxed text-slate-700 font-normal">
-                        {app.detailedDescription}
-                      </p>
+                    <div id={`details-${app.key}`} className="mt-6 pt-5 border-t border-slate-200/80">
+                      <div className="grid gap-6 md:grid-cols-12 items-start">
+                        <div className="md:col-span-7 flex flex-col justify-between h-full space-y-5">
+                          <div>
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">About this tool</h3>
+                            <p className="mt-2 text-sm md:text-base leading-relaxed text-slate-700">
+                              {app.detailedDescription}
+                            </p>
+                          </div>
 
-                      {app.features && app.features.length > 0 && (
-                        <ul className="mt-4 space-y-2 text-xs text-slate-600">
-                          {app.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-primary" />
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      <div className="mt-6 pt-4 border-t border-slate-100">
-                        <a
-                          href={app.appStoreUrl && app.appStoreUrl !== '#' ? app.appStoreUrl : 'https://apps.apple.com'}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-3 rounded-xl bg-[#0B132B] px-4 py-2.5 text-white transition-all hover:bg-slate-800 shadow-sm hover:shadow"
-                          aria-label={`View ${app.title} on the Mac App Store`}
-                        >
-                          <AppleIcon className="h-5 w-5 text-white shrink-0" />
-                          <div className="text-left">
-                            <span className="block text-[9px] uppercase font-medium tracking-wide text-slate-300 leading-tight">
-                              Coming Soon on the
-                            </span>
-                            <span className="block text-xs font-bold leading-tight tracking-tight">
-                              Mac App Store
+                          <div>
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                              macOS 14.0+ · Apple Silicon & Intel
                             </span>
                           </div>
-                        </a>
+
+                          <div className="pt-2">
+                            <a
+                              href={app.appStoreUrl && app.appStoreUrl !== '#' ? app.appStoreUrl : 'https://apps.apple.com'}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-3 rounded-xl bg-[#0B132B] px-5 py-3 text-white transition-all hover:bg-slate-800 shadow-md hover:shadow-lg"
+                              aria-label={`View ${app.title} on the Mac App Store`}
+                            >
+                              <AppleIcon className="h-6 w-6 text-white shrink-0" />
+                              <div className="text-left">
+                                <span className="block text-[10px] uppercase font-medium tracking-wider text-slate-300 leading-tight">
+                                  Coming Soon on the
+                                </span>
+                                <span className="block text-sm font-bold leading-tight tracking-tight">
+                                  Mac App Store
+                                </span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+
+                        <div className="md:col-span-5 bg-slate-50/90 border border-slate-200/70 rounded-xl p-4 md:p-5">
+                          <h3 className="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+                            <Sparkles size={14} /> Key capabilities
+                          </h3>
+                          {app.features && app.features.length > 0 && (
+                            <ul className="mt-3 space-y-2.5 text-xs md:text-sm text-slate-700">
+                              {app.features.map((feature, idx) => (
+                                <li key={idx} className="flex items-start gap-2.5">
+                                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-primary" />
+                                  <span className="leading-snug">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                          <div className="mt-4 pt-3 border-t border-slate-200/60 text-[11px] text-slate-500 flex items-center gap-1.5">
+                            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" />
+                            <span>100% on-device & private processing</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   )}
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-slate-100/60 flex items-center justify-between">
+                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => toggleCard(app.key)}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors focus:outline-none focus-visible:underline"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-hover transition-colors focus:outline-none focus-visible:underline"
                     aria-expanded={isExpanded}
                     aria-controls={`details-${app.key}`}
                   >
                     {isExpanded ? 'Less details' : 'Details'}
                     <ChevronDown
                       size={16}
-                      className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                      className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
                     />
                   </button>
+
+                  {isExpanded && (
+                    <button
+                      type="button"
+                      onClick={() => toggleCard(app.key)}
+                      className="text-xs text-slate-500 hover:text-slate-800 transition-colors"
+                    >
+                      Collapse
+                    </button>
+                  )}
                 </div>
               </article>
             );

@@ -118,15 +118,17 @@ describe('approved public product portfolio', () => {
     expect(within(main).getByText(/individuals and organizations/i)).toBeTruthy();
     expect(within(main).getByText(/Windows versions may be considered in the future/i)).toBeTruthy();
 
-    // Before clicking details, extended App Store button is not visible
+    // Before clicking details, extended App Store button is not visible and card is 1 column
     expect(within(main).queryByText('Mac App Store')).toBeNull();
+    const voiceComposerArticle = within(main).getByRole('heading', { name: 'Voice Composer' }).closest('article');
+    expect(voiceComposerArticle.className).toContain('col-span-1');
 
     // Click Details on Voice Composer
-    const voiceComposerArticle = within(main).getByRole('heading', { name: 'Voice Composer' }).closest('article');
     const detailsButton = within(voiceComposerArticle).getByRole('button', { name: /Details/i });
     fireEvent.click(detailsButton);
 
-    // After clicking details, expanded content and Mac App Store button are visible
+    // After clicking details, card expands horizontally (col-span-2), vertically, and shows Mac App Store button
+    expect(voiceComposerArticle.className).toContain('md:col-span-2');
     expect(within(voiceComposerArticle).getByText(/Fast, local-first dictation utility/i)).toBeTruthy();
     expect(within(voiceComposerArticle).getByText('Mac App Store')).toBeTruthy();
     expect(within(voiceComposerArticle).getByRole('button', { name: /Less details/i })).toBeTruthy();
@@ -134,6 +136,7 @@ describe('approved public product portfolio', () => {
     // Click Less details to collapse
     fireEvent.click(within(voiceComposerArticle).getByRole('button', { name: /Less details/i }));
     expect(within(voiceComposerArticle).queryByText('Mac App Store')).toBeNull();
+    expect(voiceComposerArticle.className).toContain('col-span-1');
   });
 });
 
