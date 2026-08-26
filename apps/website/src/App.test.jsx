@@ -106,7 +106,7 @@ describe('approved public product portfolio', () => {
     });
   });
 
-  it('lists exactly ten macOS-first desktop apps with Coming Soon status without premature availability claims', () => {
+  it('lists ten macOS-first desktop apps with Coming Soon status and interactive details toggle', () => {
     renderApp('/products/desktop-apps');
 
     const main = screen.getByRole('main');
@@ -117,7 +117,23 @@ describe('approved public product portfolio', () => {
     expect(within(main).getByText(/macOS first/i)).toBeTruthy();
     expect(within(main).getByText(/individuals and organizations/i)).toBeTruthy();
     expect(within(main).getByText(/Windows versions may be considered in the future/i)).toBeTruthy();
-    expect(within(main).queryByText(/App Store|Download|Available|Beta|Release date|Pricing/i)).toBeNull();
+
+    // Before clicking details, extended App Store button is not visible
+    expect(within(main).queryByText('Mac App Store')).toBeNull();
+
+    // Click Details on Voice Composer
+    const voiceComposerArticle = within(main).getByRole('heading', { name: 'Voice Composer' }).closest('article');
+    const detailsButton = within(voiceComposerArticle).getByRole('button', { name: /Details/i });
+    fireEvent.click(detailsButton);
+
+    // After clicking details, expanded content and Mac App Store button are visible
+    expect(within(voiceComposerArticle).getByText(/Fast, local-first dictation utility/i)).toBeTruthy();
+    expect(within(voiceComposerArticle).getByText('Mac App Store')).toBeTruthy();
+    expect(within(voiceComposerArticle).getByRole('button', { name: /Less details/i })).toBeTruthy();
+
+    // Click Less details to collapse
+    fireEvent.click(within(voiceComposerArticle).getByRole('button', { name: /Less details/i }));
+    expect(within(voiceComposerArticle).queryByText('Mac App Store')).toBeNull();
   });
 });
 

@@ -82,52 +82,133 @@ export const desktopApps = [
   {
     key: 'voice-composer',
     title: 'Voice Composer',
-    description: 'Turn spoken thoughts into structured, editable text on your Mac.'
+    description: 'Turn spoken thoughts into structured, editable text on your Mac.',
+    detailedDescription:
+      'Fast, local-first dictation utility designed for professionals who think faster than they type. Converts spoken thoughts into clean, formatted text in English and Romanian with embedded Whisper speech recognition—running 100% on-device with zero cloud dependencies.',
+    features: [
+      'Embedded Whisper speech recognition (English & Romanian)',
+      'Global hotkey with Hold-to-Talk and Toggle modes',
+      'Floating visualizer HUD and instant text insertion',
+      'Zero cloud dependency — microphone audio stays local'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'screenshot-search',
     title: 'Screenshot Search',
-    description: 'Find screenshots by their visual content and the text they contain.'
+    description: 'Find screenshots by their visual content and the text they contain.',
+    detailedDescription:
+      'On-device OCR and visual indexer that makes your screenshot library instantly searchable. Find images by keywords, code snippets, UI elements, or dates without uploading anything to the cloud.',
+    features: [
+      'High-performance on-device Apple Vision OCR',
+      'Instant search by visual content and text in images',
+      'Privacy-first local index with zero telemetry'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'audio-inbox',
     title: 'Audio Inbox',
-    description: 'Capture, organize, and process short voice notes in one focused workspace.'
+    description: 'Capture, organize, and process short voice notes in one focused workspace.',
+    detailedDescription:
+      'A dedicated menu-bar inbox for quickly capturing audio memos on the fly. Automatically transcribes voice notes locally and formats them into structured bullet points ready for your notes or task manager.',
+    features: [
+      'Quick menu bar capture with global shortcut',
+      'Automated local transcription and action item tagging',
+      'Direct export to Markdown, Apple Notes, and Obsidian'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'clipboard-intelligence',
     title: 'Clipboard Intelligence',
-    description: 'Organize clipboard history and make frequently reused content easier to find.'
+    description: 'Organize clipboard history and make frequently reused content easier to find.',
+    detailedDescription:
+      'Private, encrypted clipboard history manager with smart categorization. Re-use snippets, code fragments, color codes, and links with instant fuzzy search and automatic secret scrubbing.',
+    features: [
+      'Encrypted local history with sensitive token scrubbing',
+      'Smart categorization for code, links, colors, and text',
+      'Instant fuzzy search and paste preview'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'semantic-file-search',
     title: 'Semantic File Search',
-    description: 'Search local files by meaning when exact filenames and keywords are not enough.'
+    description: 'Search local files by meaning when exact filenames and keywords are not enough.',
+    detailedDescription:
+      'Local semantic search over your folders, PDFs, and notes powered by lightweight on-device vector embeddings. Ask questions in natural language to find the exact paragraph you need.',
+    features: [
+      'On-device neural vector embeddings without internet access',
+      'Indexes Markdown, PDF, TXT, and DOCX files',
+      'Fast natural language querying with relevance scoring'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'workspace-manager',
     title: 'Workspace Manager',
-    description: 'Open and manage repeatable project workspaces with less setup friction.'
+    description: 'Open and manage repeatable project workspaces with less setup friction.',
+    detailedDescription:
+      'Save, organize, and restore desktop window layouts, project environments, terminal sessions, and browser tabs for specific workflows with a single shortcut.',
+    features: [
+      'One-click workspace restoration and window positioning',
+      'Multi-display layout preset support',
+      'Terminal and developer tool orchestration'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'developer-scratchpad',
     title: 'Developer Scratchpad',
-    description: 'Keep temporary code, commands, notes, and transformations close at hand.'
+    description: 'Keep temporary code, commands, notes, and transformations close at hand.',
+    detailedDescription:
+      'A fast floating scratchpad tailored for software developers. Format JSON, decode JWTs, test regular expressions, convert timestamps, and transform text without opening an external web tool.',
+    features: [
+      'Built-in offline tools: JSON format, JWT decode, Base64, Regex',
+      'Persistent multi-tab buffers that survive app restarts',
+      'Syntax highlighting for over 30 languages'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'menu-bar-automations',
     title: 'Menu Bar Automations',
-    description: 'Run small, repeatable local workflows directly from the macOS menu bar.'
+    description: 'Run small, repeatable local workflows directly from the macOS menu bar.',
+    detailedDescription:
+      'Execute frequent shell scripts, automations, webhooks, and local commands directly from a lightweight menu bar icon with real-time feedback and execution history.',
+    features: [
+      'One-click execution of custom shell and AppleScript workflows',
+      'Configurable keyboard shortcuts and notification alerts',
+      'Sandboxed execution environment with detailed logs'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'smart-file-renamer',
     title: 'Smart File Renamer',
-    description: 'Preview and apply consistent names to groups of local files.'
+    description: 'Preview and apply consistent names to groups of local files.',
+    detailedDescription:
+      'Batch rename photos, documents, and media files with live interactive previews, regex pattern matching, sequence numbering, and full one-click undo support.',
+    features: [
+      'Interactive multi-file preview before changes are committed',
+      'Metadata extraction from EXIF photos and ID3 audio tags',
+      'Full reversible undo history'
+    ],
+    appStoreUrl: '#'
   },
   {
     key: 'drop-zone-file-converter',
     title: 'Drop Zone / File Converter',
-    description: 'Convert common file formats through a simple drag-and-drop workflow.'
+    description: 'Convert common file formats through a simple drag-and-drop workflow.',
+    detailedDescription:
+      'A floating desktop drop zone for instantly converting image formats (PNG, WebP, AVIF, SVG), audio, and documents locally on your Mac with zero file uploads.',
+    features: [
+      'Instant drag-and-drop file format conversions',
+      '100% offline and secure local processing',
+      'Customizable compression and quality presets'
+    ],
+    appStoreUrl: '#'
   }
 ];
 
