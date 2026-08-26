@@ -106,14 +106,14 @@ describe('approved public product portfolio', () => {
     });
   });
 
-  it('lists exactly ten planned macOS-first desktop apps without premature availability claims', () => {
+  it('lists exactly ten macOS-first desktop apps with Coming Soon status without premature availability claims', () => {
     renderApp('/products/desktop-apps');
 
     const main = screen.getByRole('main');
     plannedDesktopApps.forEach((product) => {
       expect(within(main).getByRole('heading', { name: product })).toBeTruthy();
     });
-    expect(within(main).getAllByText('Planned')).toHaveLength(10);
+    expect(within(main).getAllByText('Coming Soon')).toHaveLength(10);
     expect(within(main).getByText(/macOS first/i)).toBeTruthy();
     expect(within(main).getByText(/individuals and organizations/i)).toBeTruthy();
     expect(within(main).getByText(/Windows versions may be considered in the future/i)).toBeTruthy();

@@ -20,7 +20,7 @@ const DesktopApps = () => (
           <article key={app.key} className="surface-card p-6">
             <div className="flex items-start justify-between gap-3">
               <div className="inline-flex rounded-lg bg-primary/10 p-2 text-primary"><Monitor size={20} /></div>
-              <span className="stage-preview rounded-full px-2.5 py-1 text-[11px] font-bold">Planned</span>
+              <span className="stage-early rounded-full px-2.5 py-1 text-[11px] font-bold">Coming Soon</span>
             </div>
             <h2 className="mt-5 text-2xl font-bold">{app.title}</h2>
             <p className="mt-3 text-slate-600">{app.description}</p>
