@@ -29,12 +29,12 @@
 
   <g transform="translate(338 65) scale(.92)">
   <g fill="none" stroke="#0B132B" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" aria-label="Bacumi outlined wordmark">
-    <path d="M24 24 V184 H80 Q132 184 132 143 Q132 103 81 103 H24 H77 Q124 103 124 63 Q124 24 77 24 Z"/>
-    <path d="M178 102 Q198 82 229 82 Q270 82 270 120 V184 M270 142 Q250 184 211 184 Q177 184 177 155 Q177 128 211 128 H270"/>
-    <path d="M365 104 Q347 82 317 82 Q282 82 282 133 Q282 184 317 184 Q347 184 365 163"/>
-    <path d="M390 84 V145 Q390 184 427 184 Q465 184 465 145 V84"/>
-    <path d="M493 184 V84 M493 111 Q510 82 540 82 Q572 82 572 121 V184 M572 111 Q590 82 620 82 Q653 82 653 121 V184"/>
-    <path d="M687 84 V184"/>
+    <path data-letter="B" d="M24 24 V184 H80 Q132 184 132 143 Q132 103 81 103 H24 H77 Q124 103 124 63 Q124 24 77 24 Z"/>
+    <path data-letter="a" d="M178 102 Q198 82 229 82 Q270 82 270 120 V184 M270 142 Q250 184 211 184 Q177 184 177 155 Q177 128 211 128 H270"/>
+    <path data-letter="c" transform="translate(24 0)" d="M365 104 Q347 82 317 82 Q282 82 282 133 Q282 184 317 184 Q347 184 365 163"/>
+    <path data-letter="u" transform="translate(24 0)" d="M390 84 V145 Q390 184 427 184 Q465 184 465 145 V84"/>
+    <path data-letter="m" transform="translate(24 0)" d="M493 184 V84 M493 111 Q510 82 540 82 Q572 82 572 121 V184 M572 111 Q590 82 620 82 Q653 82 653 121 V184"/>
+    <path data-letter="i" transform="translate(24 0)" d="M687 84 V184"/>
   </g>
-  <circle cx="687" cy="46" r="13" fill="#0B132B"/></g>
+  <circle data-letter="i-dot" cx="711" cy="46" r="13" fill="#0B132B"/></g>
 </svg>
