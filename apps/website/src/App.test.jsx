@@ -111,16 +111,18 @@ describe('approved public product portfolio', () => {
 
     const main = screen.getByRole('main');
     plannedDesktopApps.forEach((product) => {
-      expect(within(main).getByRole('heading', { name: product })).toBeTruthy();
+      expect(within(main).getAllByRole('heading', { name: product }).length).toBeGreaterThan(0);
     });
     expect(within(main).getAllByText('Coming Soon')).toHaveLength(10);
-    expect(within(main).getByText(/macOS first/i)).toBeTruthy();
+    expect(within(main).getAllByText(/macOS first/i).length).toBeGreaterThan(0);
     expect(within(main).getByText(/individuals and organizations/i)).toBeTruthy();
     expect(within(main).getByText(/Windows versions may be considered in the future/i)).toBeTruthy();
 
     // Before clicking details, extended App Store button is not visible and card is 1 column
     expect(within(main).queryByText('Mac App Store')).toBeNull();
-    const voiceComposerArticle = within(main).getByRole('heading', { name: 'Voice Composer' }).closest('article');
+    const exploreSection = document.getElementById('explore-apps') || main;
+    const voiceComposerHeadings = within(exploreSection).getAllByRole('heading', { name: 'Voice Composer' });
+    const voiceComposerArticle = voiceComposerHeadings[voiceComposerHeadings.length - 1].closest('article');
     expect(voiceComposerArticle.className).toContain('col-span-1');
 
     // Click Details on Voice Composer

@@ -82,6 +82,9 @@ export const desktopApps = [
   {
     key: 'voice-composer',
     title: 'Voice Composer',
+    subtitle: 'Local Dictation & Speech Intelligence',
+    track: 'Local AI',
+    stage: 'Coming Soon',
     description: 'Turn spoken thoughts into structured, editable text on your Mac.',
     detailedDescription:
       'Fast, local-first dictation utility designed for professionals who think faster than they type. Converts spoken thoughts into clean, formatted text in English and Romanian with embedded Whisper speech recognition—running 100% on-device with zero cloud dependencies.',
@@ -96,6 +99,9 @@ export const desktopApps = [
   {
     key: 'screenshot-search',
     title: 'Screenshot Search',
+    subtitle: 'Visual & Text OCR Retrieval',
+    track: 'Local AI',
+    stage: 'Coming Soon',
     description: 'Find screenshots by their visual content and the text they contain.',
     detailedDescription:
       'On-device OCR and visual indexer that makes your screenshot library instantly searchable. Find images by keywords, code snippets, UI elements, or dates without uploading anything to the cloud.',
@@ -109,6 +115,9 @@ export const desktopApps = [
   {
     key: 'audio-inbox',
     title: 'Audio Inbox',
+    subtitle: 'Voice Note Inbox & Processing',
+    track: 'Audio',
+    stage: 'Coming Soon',
     description: 'Capture, organize, and process short voice notes in one focused workspace.',
     detailedDescription:
       'A dedicated menu-bar inbox for quickly capturing audio memos on the fly. Automatically transcribes voice notes locally and formats them into structured bullet points ready for your notes or task manager.',
@@ -122,6 +131,9 @@ export const desktopApps = [
   {
     key: 'clipboard-intelligence',
     title: 'Clipboard Intelligence',
+    subtitle: 'Private Clipboard History',
+    track: 'Productivity',
+    stage: 'Coming Soon',
     description: 'Organize clipboard history and make frequently reused content easier to find.',
     detailedDescription:
       'Private, encrypted clipboard history manager with smart categorization. Re-use snippets, code fragments, color codes, and links with instant fuzzy search and automatic secret scrubbing.',
@@ -135,6 +147,9 @@ export const desktopApps = [
   {
     key: 'semantic-file-search',
     title: 'Semantic File Search',
+    subtitle: 'On-Device Semantic Search',
+    track: 'Local AI',
+    stage: 'Coming Soon',
     description: 'Search local files by meaning when exact filenames and keywords are not enough.',
     detailedDescription:
       'Local semantic search over your folders, PDFs, and notes powered by lightweight on-device vector embeddings. Ask questions in natural language to find the exact paragraph you need.',
@@ -148,6 +163,9 @@ export const desktopApps = [
   {
     key: 'workspace-manager',
     title: 'Workspace Manager',
+    subtitle: 'Window & Context Orchestration',
+    track: 'Productivity',
+    stage: 'Coming Soon',
     description: 'Open and manage repeatable project workspaces with less setup friction.',
     detailedDescription:
       'Save, organize, and restore desktop window layouts, project environments, terminal sessions, and browser tabs for specific workflows with a single shortcut.',
@@ -161,6 +179,9 @@ export const desktopApps = [
   {
     key: 'developer-scratchpad',
     title: 'Developer Scratchpad',
+    subtitle: 'Developer Text Transformations',
+    track: 'Developer',
+    stage: 'Coming Soon',
     description: 'Keep temporary code, commands, notes, and transformations close at hand.',
     detailedDescription:
       'A fast floating scratchpad tailored for software developers. Format JSON, decode JWTs, test regular expressions, convert timestamps, and transform text without opening an external web tool.',
@@ -174,6 +195,9 @@ export const desktopApps = [
   {
     key: 'menu-bar-automations',
     title: 'Menu Bar Automations',
+    subtitle: 'Menu Bar Script Runner',
+    track: 'Automation',
+    stage: 'Coming Soon',
     description: 'Run small, repeatable local workflows directly from the macOS menu bar.',
     detailedDescription:
       'Execute frequent shell scripts, automations, webhooks, and local commands directly from a lightweight menu bar icon with real-time feedback and execution history.',
@@ -187,6 +211,9 @@ export const desktopApps = [
   {
     key: 'smart-file-renamer',
     title: 'Smart File Renamer',
+    subtitle: 'Batch File Renaming & Undo',
+    track: 'Productivity',
+    stage: 'Coming Soon',
     description: 'Preview and apply consistent names to groups of local files.',
     detailedDescription:
       'Batch rename photos, documents, and media files with live interactive previews, regex pattern matching, sequence numbering, and full one-click undo support.',
@@ -200,6 +227,9 @@ export const desktopApps = [
   {
     key: 'drop-zone-file-converter',
     title: 'Drop Zone / File Converter',
+    subtitle: 'Drag & Drop Format Converter',
+    track: 'Productivity',
+    stage: 'Coming Soon',
     description: 'Convert common file formats through a simple drag-and-drop workflow.',
     detailedDescription:
       'A floating desktop drop zone for instantly converting image formats (PNG, WebP, AVIF, SVG), audio, and documents locally on your Mac with zero file uploads.',
