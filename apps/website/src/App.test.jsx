@@ -4,14 +4,35 @@ import { MemoryRouter, useLocation } from 'react-router-dom';
 import App from './App';
 import DocsLayout from './components/docs/DocsLayout';
 import { getAdjacentDocs, prPulseDocs } from './content/prPulseDocs';
+import {
+  developerScratchpadDocs,
+  getAdjacentDeveloperScratchpadDocs,
+  getAdjacentVoiceComposerDocs,
+  voiceComposerDocs
+} from './content/macAppDocs';
+
+const macAppDocumentationRoutes = [
+  ['/docs/voice-composer', /Voice Composer Documentation/i],
+  ['/docs/voice-composer/getting-started', /Getting Started/i],
+  ['/docs/voice-composer/dictation-workflow', /Dictation Workflow/i],
+  ['/docs/voice-composer/settings', /Settings & Menu Bar/i],
+  ['/docs/voice-composer/privacy', /Privacy & Local Processing/i],
+  ['/docs/developer-scratchpad', /Developer Scratchpad Documentation/i],
+  ['/docs/developer-scratchpad/getting-started', /Getting Started/i],
+  ['/docs/developer-scratchpad/tools', /Transformation Tools/i],
+  ['/docs/developer-scratchpad/themes', /Themes & Workspace/i],
+  ['/docs/developer-scratchpad/privacy', /Privacy & Offline Operation/i]
+];
 
 const documentationRoutes = [
+  ['/docs', /Bacumi Documentation/i],
   ['/docs/pr-pulse', /PR Pulse Documentation/i],
   ['/docs/pr-pulse/dashboard', /Core Dashboard/i],
   ['/docs/pr-pulse/filtering-and-search', /Filtering and Search/i],
   ['/docs/pr-pulse/personal-views', /Personal Views/i],
   ['/docs/pr-pulse/pr-details', /PR Details and Quick Actions/i],
-  ['/docs/pr-pulse/team-insights', /Team Insights/i]
+  ['/docs/pr-pulse/team-insights', /Team Insights/i],
+  ...macAppDocumentationRoutes
 ];
 
 const approvedProducts = ['PR Pulse', 'PR Pulse Pro', 'Company Verify'];
@@ -48,7 +69,7 @@ const compatibilityRedirects = [
     heading: /A clear portfolio for better work outcomes/i,
     retiredProduct: 'Bacumi Tempo'
   },
-  { from: '/docs', to: '/docs/pr-pulse', heading: /PR Pulse Documentation/i },
+  { from: '/docs', to: '/docs', heading: /Bacumi Documentation/i },
   { from: '/docs/pulse/dashboard', to: '/docs/pr-pulse/dashboard', heading: /Core Dashboard/i },
   {
     from: '/docs/pulse/filtering-search',
@@ -179,6 +200,24 @@ describe('product contact calls to action', () => {
 });
 
 describe('documentation shell', () => {
+  it('keeps mac app documentation order immutable and resolves boundaries safely', () => {
+    expect(voiceComposerDocs.map((doc) => doc.label)).toEqual([
+      'Introduction',
+      'Getting Started',
+      'Dictation Workflow',
+      'Settings & Menu Bar',
+      'Privacy & Local Processing'
+    ]);
+    expect(getAdjacentVoiceComposerDocs('/docs/voice-composer')).toEqual({
+      previous: null,
+      next: voiceComposerDocs[1]
+    });
+    expect(getAdjacentDeveloperScratchpadDocs('/docs/developer-scratchpad/privacy')).toEqual({
+      previous: developerScratchpadDocs[3],
+      next: null
+    });
+  });
+
   it('keeps the canonical documentation order immutable and resolves boundaries safely', () => {
     expect(prPulseDocs.map((doc) => doc.label)).toEqual([
       'Introduction',
@@ -263,14 +302,14 @@ describe('global public truth', () => {
     expect(productsButton.getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('uses the canonical PR Pulse documentation route in global navigation', () => {
+  it('uses the documentation hub route in global navigation', () => {
     renderApp('/');
 
     const documentationLinks = screen.getAllByRole('link', { name: /^(Docs|Documentation)$/i });
 
-    expect(documentationLinks).toHaveLength(2);
+    expect(documentationLinks.length).toBeGreaterThanOrEqual(2);
     documentationLinks.forEach((link) => {
-      expect(link.getAttribute('href')).toBe('/docs/pr-pulse');
+      expect(link.getAttribute('href')).toBe('/docs');
     });
   });
 

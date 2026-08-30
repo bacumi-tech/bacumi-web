@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 py-2 backdrop-blur-md shadow-[0_8px_24px_-18px_rgba(40,24,62,0.6)]' : 'bg-transparent py-4'
+        scrolled ? 'bg-white/90 py-2 backdrop-blur-md shadow-[0_8px_24px_-18px_rgba(15,17,21,0.35)]' : 'bg-transparent py-4'
       }`}
     >
       <div className="layout-container flex h-16 items-center justify-between">
@@ -88,7 +88,7 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
-          <Link to="/docs/pr-pulse" className="nav-link">
+          <Link to="/docs" className="nav-link">
             Docs
           </Link>
         </nav>
@@ -138,7 +138,7 @@ const Navbar = () => {
                 </Link>
               ))}
               <Link
-                to="/docs/pr-pulse"
+                to="/docs"
                 className="block rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-primary/5 hover:text-primary"
                 onClick={() => setIsOpen(false)}
               >

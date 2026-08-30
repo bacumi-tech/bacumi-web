@@ -37,8 +37,18 @@ const Footer = () => {
             <h3 className="font-display text-base font-bold text-slate-900">Resources</h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-600">
               <li>
-                <Link to="/docs/pr-pulse" className="hover:text-primary">
+                <Link to="/docs" className="hover:text-primary">
                   Documentation
+                </Link>
+              </li>
+              <li>
+                <Link to="/docs/voice-composer" className="hover:text-primary">
+                  Voice Composer Docs
+                </Link>
+              </li>
+              <li>
+                <Link to="/docs/developer-scratchpad" className="hover:text-primary">
+                  Developer Scratchpad Docs
                 </Link>
               </li>
               <li>

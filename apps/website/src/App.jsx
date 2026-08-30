@@ -14,6 +14,17 @@ import PersonalViewsDocs from './pages/docs/PersonalViewsDocs';
 import PrDetailsDocs from './pages/docs/PrDetailsDocs';
 import PrPulseDocsIndex from './pages/docs/PrPulseDocsIndex';
 import TeamInsightsDocs from './pages/docs/TeamInsightsDocs';
+import DocsHub from './pages/docs/DocsHub';
+import VoiceComposerDocsIndex from './pages/docs/voice-composer/VoiceComposerDocsIndex';
+import VoiceComposerGettingStarted from './pages/docs/voice-composer/VoiceComposerGettingStarted';
+import VoiceComposerDictationWorkflow from './pages/docs/voice-composer/VoiceComposerDictationWorkflow';
+import VoiceComposerSettingsDocs from './pages/docs/voice-composer/VoiceComposerSettingsDocs';
+import VoiceComposerPrivacyDocs from './pages/docs/voice-composer/VoiceComposerPrivacyDocs';
+import DeveloperScratchpadDocsIndex from './pages/docs/developer-scratchpad/DeveloperScratchpadDocsIndex';
+import DeveloperScratchpadGettingStarted from './pages/docs/developer-scratchpad/DeveloperScratchpadGettingStarted';
+import DeveloperScratchpadToolsDocs from './pages/docs/developer-scratchpad/DeveloperScratchpadToolsDocs';
+import DeveloperScratchpadThemesDocs from './pages/docs/developer-scratchpad/DeveloperScratchpadThemesDocs';
+import DeveloperScratchpadPrivacyDocs from './pages/docs/developer-scratchpad/DeveloperScratchpadPrivacyDocs';
 import ProductCompanyVerify from './pages/ProductCompanyVerify';
 import ProductPulse from './pages/ProductPulse';
 import ProductPulsePro from './pages/ProductPulsePro';
@@ -62,7 +73,17 @@ function App() {
         <Route path="/docs/pr-pulse/personal-views" element={<PersonalViewsDocs />} />
         <Route path="/docs/pr-pulse/pr-details" element={<PrDetailsDocs />} />
         <Route path="/docs/pr-pulse/team-insights" element={<TeamInsightsDocs />} />
-        <Route path="/docs" element={<Navigate replace to="/docs/pr-pulse" />} />
+        <Route path="/docs/voice-composer" element={<VoiceComposerDocsIndex />} />
+        <Route path="/docs/voice-composer/getting-started" element={<VoiceComposerGettingStarted />} />
+        <Route path="/docs/voice-composer/dictation-workflow" element={<VoiceComposerDictationWorkflow />} />
+        <Route path="/docs/voice-composer/settings" element={<VoiceComposerSettingsDocs />} />
+        <Route path="/docs/voice-composer/privacy" element={<VoiceComposerPrivacyDocs />} />
+        <Route path="/docs/developer-scratchpad" element={<DeveloperScratchpadDocsIndex />} />
+        <Route path="/docs/developer-scratchpad/getting-started" element={<DeveloperScratchpadGettingStarted />} />
+        <Route path="/docs/developer-scratchpad/tools" element={<DeveloperScratchpadToolsDocs />} />
+        <Route path="/docs/developer-scratchpad/themes" element={<DeveloperScratchpadThemesDocs />} />
+        <Route path="/docs/developer-scratchpad/privacy" element={<DeveloperScratchpadPrivacyDocs />} />
+        <Route path="/docs" element={<DocsHub />} />
         <Route path="/docs/pulse/dashboard" element={<Navigate replace to="/docs/pr-pulse/dashboard" />} />
         <Route path="/docs/pulse/filtering-search" element={<Navigate replace to="/docs/pr-pulse/filtering-and-search" />} />
         <Route path="/docs/pulse/personal-views" element={<Navigate replace to="/docs/pr-pulse/personal-views" />} />

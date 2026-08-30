@@ -152,12 +152,12 @@ const DesktopApps = () => {
                             </span>
                           </div>
 
-                          <div className="pt-2">
+                          <div className="pt-2 flex flex-wrap gap-3">
                             <a
                               href={app.appStoreUrl && app.appStoreUrl !== '#' ? app.appStoreUrl : 'https://apps.apple.com'}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-3 rounded-xl bg-[#0B132B] px-5 py-3 !text-white transition-all hover:bg-slate-800 shadow-md hover:shadow-lg"
+                              className="inline-flex items-center gap-3 rounded-xl bg-primary px-5 py-3 !text-white transition-all hover:bg-primary-hover shadow-md hover:shadow-lg"
                               aria-label={`View ${app.title} on the Mac App Store`}
                             >
                               <AppleIcon className="h-6 w-6 text-white shrink-0" />
@@ -170,6 +170,14 @@ const DesktopApps = () => {
                                 </span>
                               </div>
                             </a>
+                            {(app.key === 'voice-composer' || app.key === 'developer-scratchpad') && (
+                              <Link
+                                to={`/docs/${app.key}`}
+                                className="inline-flex items-center gap-2 rounded-xl border border-surface-border bg-white px-5 py-3 text-sm font-semibold text-primary transition-colors hover:border-primary/40 hover:text-primary-hover"
+                              >
+                                Read documentation <ArrowRight size={15} />
+                              </Link>
+                            )}
                           </div>
                         </div>
 

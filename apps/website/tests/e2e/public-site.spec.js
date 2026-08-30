@@ -7,12 +7,23 @@ const canonicalRoutes = [
   { path: '/products/pulse', heading: /PR Pulse/ },
   { path: '/products/pr-pulse-pro', heading: 'PR Pulse Pro' },
   { path: '/products/company-verify', heading: 'Company Verify' },
+  { path: '/docs', heading: 'Bacumi Documentation', docs: true },
   { path: '/docs/pr-pulse', heading: 'PR Pulse Documentation', docs: true },
   { path: '/docs/pr-pulse/dashboard', heading: 'Core Dashboard', docs: true },
   { path: '/docs/pr-pulse/filtering-and-search', heading: 'Filtering and Search', docs: true },
   { path: '/docs/pr-pulse/personal-views', heading: 'Personal Views', docs: true },
   { path: '/docs/pr-pulse/pr-details', heading: 'PR Details and Quick Actions', docs: true },
-  { path: '/docs/pr-pulse/team-insights', heading: 'Team Insights', docs: true }
+  { path: '/docs/pr-pulse/team-insights', heading: 'Team Insights', docs: true },
+  { path: '/docs/voice-composer', heading: 'Voice Composer Documentation', docs: true },
+  { path: '/docs/voice-composer/getting-started', heading: 'Getting Started', docs: true },
+  { path: '/docs/voice-composer/dictation-workflow', heading: 'Dictation Workflow', docs: true },
+  { path: '/docs/voice-composer/settings', heading: 'Settings & Menu Bar', docs: true },
+  { path: '/docs/voice-composer/privacy', heading: 'Privacy & Local Processing', docs: true },
+  { path: '/docs/developer-scratchpad', heading: 'Developer Scratchpad Documentation', docs: true },
+  { path: '/docs/developer-scratchpad/getting-started', heading: 'Getting Started', docs: true },
+  { path: '/docs/developer-scratchpad/tools', heading: 'Transformation Tools', docs: true },
+  { path: '/docs/developer-scratchpad/themes', heading: 'Themes & Workspace', docs: true },
+  { path: '/docs/developer-scratchpad/privacy', heading: 'Privacy & Offline Operation', docs: true }
 ];
 
 const capturePageErrors = (page) => {
