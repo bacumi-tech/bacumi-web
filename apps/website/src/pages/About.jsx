@@ -28,7 +28,7 @@ const About = () => {
           <span className="label-chip">About Bacumi</span>
           <h1 className="mx-auto mt-5 max-w-4xl text-4xl font-bold md:text-6xl">{brand.promise}</h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-600 md:text-xl">
-            Bacumi is a product project building focused software for teams that want clearer workflows and better execution.
+            Bacumi SRL builds focused software for teams that want clearer workflows and better execution.
           </p>
         </div>
       </section>
@@ -49,7 +49,7 @@ const About = () => {
         <div className="section-block p-7 md:p-9">
           <h2 className="text-2xl font-bold md:text-3xl">How we position our portfolio</h2>
           <p className="mt-4 text-slate-600">
-            PR Pulse for Azure DevOps is the live flagship product. The roadmap proceeds deliberately from the shared foundation to PR Pulse Pro and then Company Verify, with scope validated before each build stage.
+            PR Pulse for Azure DevOps is the live flagship product. Future products carry a clear stage and are shaped through focused early-access and design-partner conversations before availability.
           </p>
         </div>
       </section>

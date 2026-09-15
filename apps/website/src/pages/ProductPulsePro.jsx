@@ -47,8 +47,8 @@ const ProductPulsePro = () => (
       }
       subtitle="A bounded future product for historical engineering flow signals, stale-work policies, and a weekly Teams digest. It is not currently available."
       cta={{
-        text: 'Discuss a design partnership',
-        link: '/contact',
+        text: 'Apply for early access',
+        link: '/pilots?product=pr-pulse-pro',
         secondary: {
           text: 'Explore solutions',
           link: '/solutions'
@@ -95,9 +95,14 @@ const ProductPulsePro = () => (
         <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-600">
           This is a future product discussion, not an availability or launch commitment.
         </p>
-        <Link to="/contact" className="btn-primary mt-8 h-12 px-8 text-sm md:text-base">
-          Discuss a design partnership
-        </Link>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Link to="/pilots?product=pr-pulse-pro" className="btn-primary h-12 px-8 text-sm md:text-base">
+            Apply for early access
+          </Link>
+          <Link to="/contact" className="btn-secondary h-12 px-8 text-sm md:text-base">
+            Contact Bacumi
+          </Link>
+        </div>
       </div>
     </section>
   </div>

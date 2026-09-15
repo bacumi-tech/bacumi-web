@@ -7,7 +7,10 @@ const canonicalRoutes = [
   { path: '/products/pulse', heading: /PR Pulse/ },
   { path: '/products/pr-pulse-pro', heading: 'PR Pulse Pro' },
   { path: '/products/company-verify', heading: 'Company Verify' },
-  { path: '/docs', heading: 'Bacumi Documentation', docs: true },
+  { path: '/pricing', heading: 'Transparent pricing by product stage' },
+  { path: '/contact', heading: 'Contact Bacumi' },
+  { path: '/pilots', heading: 'Apply for a Bacumi pilot' },
+  { path: '/docs', heading: 'Bacumi Documentation' },
   { path: '/docs/pr-pulse', heading: 'PR Pulse Documentation', docs: true },
   { path: '/docs/pr-pulse/dashboard', heading: 'Core Dashboard', docs: true },
   { path: '/docs/pr-pulse/filtering-and-search', heading: 'Filtering and Search', docs: true },
@@ -19,11 +22,10 @@ const canonicalRoutes = [
   { path: '/docs/voice-composer/dictation-workflow', heading: 'Dictation Workflow', docs: true },
   { path: '/docs/voice-composer/settings', heading: 'Settings & Menu Bar', docs: true },
   { path: '/docs/voice-composer/privacy', heading: 'Privacy & Local Processing', docs: true },
-  { path: '/docs/developer-scratchpad', heading: 'Developer Scratchpad Documentation', docs: true },
-  { path: '/docs/developer-scratchpad/getting-started', heading: 'Getting Started', docs: true },
-  { path: '/docs/developer-scratchpad/tools', heading: 'Transformation Tools', docs: true },
-  { path: '/docs/developer-scratchpad/themes', heading: 'Themes & Workspace', docs: true },
-  { path: '/docs/developer-scratchpad/privacy', heading: 'Privacy & Offline Operation', docs: true }
+  { path: '/legal/privacy', heading: 'Privacy Policy' },
+  { path: '/legal/terms', heading: 'Terms of Service' },
+  { path: '/legal/gdpr', heading: 'GDPR Information' },
+  { path: '/legal/trust', heading: 'Trust Center' }
 ];
 
 const capturePageErrors = (page) => {
@@ -168,9 +170,9 @@ test('mobile navigation reaches canonical documentation without page-level overf
   await page.getByRole('button', { name: 'Toggle menu' }).click();
   await page.getByRole('link', { name: 'Docs', exact: true }).click();
 
-  await expect(page).toHaveURL(/\/docs\/pr-pulse$/);
+  await expect(page).toHaveURL(/\/docs$/);
   await expect(
-    page.getByRole('heading', { level: 1, name: 'PR Pulse Documentation', exact: true })
+    page.getByRole('heading', { level: 1, name: 'Bacumi Documentation', exact: true })
   ).toBeVisible();
   await expectNoPageOverflow(page);
 
@@ -181,4 +183,17 @@ test('mobile navigation reaches canonical documentation without page-level overf
   ).toBeVisible();
   await expectNoPageOverflow(page);
   expectNoPageErrors(pageErrors);
+});
+
+test('hidden desktop documentation redirects to the public docs hub', async ({ page }) => {
+  await page.goto('/docs/developer-scratchpad/getting-started');
+  await expect(page).toHaveURL(/\/docs$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'Bacumi Documentation' })).toBeVisible();
+  await expect(page.getByText('Developer Scratchpad', { exact: true })).toHaveCount(0);
+});
+
+test('unknown routes render a noindex not-found page', async ({ page }) => {
+  await page.goto('/not-a-public-route');
+  await expect(page.getByRole('heading', { level: 1, name: 'Page not found' })).toBeVisible();
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex,follow');
 });

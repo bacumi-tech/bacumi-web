@@ -1,7 +1,7 @@
 import { contacts } from './siteCopy';
 
 export const legalMeta = {
-  privacyLastUpdated: 'August 24, 2026',
+  privacyLastUpdated: 'September 6, 2026',
   termsLastUpdated: 'August 24, 2026',
   gdprLastUpdated: 'August 24, 2026'
 };
@@ -15,28 +15,28 @@ export const legalEntity = {
 
 export const privacySections = {
   scope:
-    'This Privacy Policy describes how Bacumi SRL handles personal data when you use our website and support channels.',
+    'This Privacy Policy describes how Bacumi SRL handles personal data when you use our website, contact us, or apply for a pilot.',
   dataCategories: [
-    'Account and contact data you provide to us, such as name, work email, and organization details.',
-    'Service usage metadata needed to operate and support our services, such as request timestamps, feature usage events, and error logs.',
-    'Support and communications data when you contact us for product, billing, or technical support.'
+    'Contact messages may include your email address, name, selected category or product, and the message you choose to send.',
+    'Pilot applications may include your email address, name, company, selected product, platform, use case, and acknowledgement that we may contact you about the application.',
+    'Limited technical data used to secure the forms and diagnose failures, such as request time and a protected identifier derived from a trusted client address.'
   ],
   legalBases: [
-    'Performance of a contract, when data is required to provide requested services.',
-    'Legitimate interests, such as service reliability, abuse prevention, and support operations.',
+    'Steps taken at your request, when you ask about a product or possible commercial relationship.',
+    'Legitimate interests, such as responding to enquiries, evaluating product demand, service reliability, abuse prevention, and support operations.',
     'Legal obligations, where retention or disclosure is required by applicable law.',
-    'Consent, when consent is required by law for specific processing activities.'
+    'Consent, where it is the appropriate basis for a specific processing activity. Pilot contact permission applies only to that application and is not marketing consent.'
   ],
   purposes: [
-    'Operate, secure, and improve Bacumi products and services.',
-    'Respond to support requests and service inquiries.',
-    'Manage customer relationships, billing, and contractual obligations.',
-    'Maintain logs for security, diagnostics, and service continuity.'
+    'Respond to contact messages and support requests.',
+    'Review pilot applications, assess suitability, and contact selected applicants.',
+    'Understand demand for published Bacumi products and programs.',
+    'Protect the forms from abuse and maintain short-lived diagnostic records.'
   ],
   retention:
-    'We retain personal data only for as long as needed for the purposes above, plus any legally required retention period. Retention windows vary by data type and contractual obligations.',
+    'Contact messages are scheduled for deletion within 180 days and pilot applications within 365 days, unless an earlier deletion is appropriate or a legal obligation requires longer retention. Form abuse counters expire within 24 hours and application diagnostic events within 30 days.',
   subprocessors:
-    'We may rely on third-party infrastructure, observability, communication, and payment providers. Subprocessor usage depends on product configuration and contractual setup. Details are provided on request or in contractual documentation.',
+    'Website form submissions are processed using Microsoft Azure hosting and storage services. Azure Communication Services may send a limited internal notification containing a submission type, product or category, and reference. The notification does not include the message, use case, or email address.',
   transfers:
     'Where personal data is transferred outside the EEA, Bacumi applies appropriate safeguards required by applicable data protection law, such as contractual safeguards.',
   rights: [

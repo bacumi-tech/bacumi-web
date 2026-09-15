@@ -1,6 +1,8 @@
 {
   "name": "Bacumi",
   "short_name": "Bacumi",
+  "description": "Focused business and desktop software from Bacumi.",
+  "start_url": "/",
   "icons": [
     {
       "src": "/icon-192.png",

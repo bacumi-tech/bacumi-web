@@ -60,7 +60,7 @@ describe('Bacumi public brand assets', () => {
 
     expect(html).toContain('href="/favicon.svg"');
     expect(html).toContain('href="/site.webmanifest"');
-    expect(html).toContain('content="/social-preview.png"');
+    expect(html).toContain('content="https://bacumi.com/social-preview.png"');
     expect(html).toContain('content="#0F1115"');
   });
 

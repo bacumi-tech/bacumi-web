@@ -15,12 +15,12 @@ const VoiceComposerDocsLayout = ({ children }) => {
       mobileSelectLabel="Browse Voice Composer documentation"
       pagination={getAdjacentVoiceComposerDocs(location.pathname)}
       installCta={{
-        eyebrow: 'Voice Composer for macOS',
-        title: 'Interested in early access?',
+        eyebrow: 'Voice Composer',
+        title: 'Interested in the Voice Composer pilot?',
         description:
-          'Voice Composer is in active development for macOS. Contact Bacumi if you want to follow release updates or join a preview.',
-        linkText: 'Contact Bacumi',
-        href: '/contact'
+          'Voice Composer is in development. Apply to tell us about your dictation workflow and preferred platform.',
+        linkText: 'Express pilot interest',
+        href: '/pilots?product=voice-composer'
       }}
     >
       {children}

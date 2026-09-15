@@ -1,0 +1,149 @@
+{
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' https://fonts.gstatic.com data:; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: https:; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; upgrade-insecure-requests",
+    "Permissions-Policy": "camera=(), geolocation=(), microphone=(), payment=(), usb=()",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY"
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/api/*",
+      "/assets/*",
+      "/brand/*",
+      "/images/*",
+      "/*.{css,cur,gif,ico,jpeg,jpg,js,json,map,png,svg,txt,webmanifest,webp,woff,woff2,xml}"
+    ]
+  },
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": [
+        "anonymous"
+      ],
+      "headers": {
+        "Cache-Control": "no-store"
+      }
+    },
+    {
+      "route": "/assets/*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/",
+      "rewrite": "/index.html"
+    },
+    {
+      "route": "/products",
+      "rewrite": "/products/index.html"
+    },
+    {
+      "route": "/products/business-software",
+      "rewrite": "/products/business-software/index.html"
+    },
+    {
+      "route": "/products/desktop-apps",
+      "rewrite": "/products/desktop-apps/index.html"
+    },
+    {
+      "route": "/products/pulse",
+      "rewrite": "/products/pulse/index.html"
+    },
+    {
+      "route": "/products/pr-pulse-pro",
+      "rewrite": "/products/pr-pulse-pro/index.html"
+    },
+    {
+      "route": "/products/company-verify",
+      "rewrite": "/products/company-verify/index.html"
+    },
+    {
+      "route": "/pricing",
+      "rewrite": "/pricing/index.html"
+    },
+    {
+      "route": "/contact",
+      "rewrite": "/contact/index.html"
+    },
+    {
+      "route": "/pilots",
+      "rewrite": "/pilots/index.html"
+    },
+    {
+      "route": "/about",
+      "rewrite": "/about/index.html"
+    },
+    {
+      "route": "/docs",
+      "rewrite": "/docs/index.html"
+    },
+    {
+      "route": "/docs/pr-pulse",
+      "rewrite": "/docs/pr-pulse/index.html"
+    },
+    {
+      "route": "/docs/pr-pulse/dashboard",
+      "rewrite": "/docs/pr-pulse/dashboard/index.html"
+    },
+    {
+      "route": "/docs/pr-pulse/filtering-and-search",
+      "rewrite": "/docs/pr-pulse/filtering-and-search/index.html"
+    },
+    {
+      "route": "/docs/pr-pulse/personal-views",
+      "rewrite": "/docs/pr-pulse/personal-views/index.html"
+    },
+    {
+      "route": "/docs/pr-pulse/pr-details",
+      "rewrite": "/docs/pr-pulse/pr-details/index.html"
+    },
+    {
+      "route": "/docs/pr-pulse/team-insights",
+      "rewrite": "/docs/pr-pulse/team-insights/index.html"
+    },
+    {
+      "route": "/docs/voice-composer",
+      "rewrite": "/docs/voice-composer/index.html"
+    },
+    {
+      "route": "/docs/voice-composer/getting-started",
+      "rewrite": "/docs/voice-composer/getting-started/index.html"
+    },
+    {
+      "route": "/docs/voice-composer/dictation-workflow",
+      "rewrite": "/docs/voice-composer/dictation-workflow/index.html"
+    },
+    {
+      "route": "/docs/voice-composer/settings",
+      "rewrite": "/docs/voice-composer/settings/index.html"
+    },
+    {
+      "route": "/docs/voice-composer/privacy",
+      "rewrite": "/docs/voice-composer/privacy/index.html"
+    },
+    {
+      "route": "/legal/privacy",
+      "rewrite": "/legal/privacy/index.html"
+    },
+    {
+      "route": "/legal/terms",
+      "rewrite": "/legal/terms/index.html"
+    },
+    {
+      "route": "/legal/gdpr",
+      "rewrite": "/legal/gdpr/index.html"
+    },
+    {
+      "route": "/legal/trust",
+      "rewrite": "/legal/trust/index.html"
+    }
+  ],
+  "mimeTypes": {
+    ".json": "application/json",
+    ".webmanifest": "application/manifest+json"
+  }
+}

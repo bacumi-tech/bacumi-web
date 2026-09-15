@@ -30,3 +30,7 @@ jobs:
         run: pnpm test
       - name: Build
         run: pnpm build
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Browser checks
+        run: pnpm test:e2e

@@ -6,8 +6,8 @@ const VoiceComposerPrivacyDocs = () => (
     <h1>Privacy & Local Processing</h1>
 
     <p>
-      Voice Composer is local-first by design. Your microphone audio and transcript text are processed on
-      your Mac and are not sent to a Bacumi cloud service for transcription.
+      Voice Composer is being built around a local-first design. In the current macOS development build,
+      microphone audio and transcript text are processed on the device rather than by a Bacumi transcription service.
     </p>
 
     <h2>Default Data Flow</h2>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import StageBadge from '../components/ui/StageBadge';
 
 const pulseFeatures = [
   'Unified multi-repository PR dashboard',
@@ -14,12 +15,14 @@ const pulseFeatures = [
 const roadmapProducts = [
   {
     name: 'PR Pulse Pro',
-    status: 'Design Partner',
+    status: 'Coming Soon',
+    product: 'pr-pulse-pro',
     summary: 'A future paid product focused on 90-day flow history, configurable stale thresholds, and weekly Teams digests.'
   },
   {
     name: 'Company Verify',
     status: 'Design Partner',
+    product: 'company-verify',
     summary: 'A planned Excel-first workflow for Romania and VIES company verification with auditable results.'
   }
 ];
@@ -68,12 +71,10 @@ const Pricing = () => {
           {roadmapProducts.map((product) => (
             <article key={product.name} className="surface-card flex h-full flex-col p-6">
               <h3 className="text-2xl font-bold">{product.name}</h3>
-              <span className="stage-preview mt-3 w-fit rounded-full px-2.5 py-1 text-xs font-bold">
-                {product.status}
-              </span>
+              <span className="mt-3 w-fit"><StageBadge stage={product.status} /></span>
               <p className="mt-4 flex-grow text-slate-600">{product.summary}</p>
-              <Link to="/contact" className="btn-secondary mt-6 h-11 px-6 text-sm">
-                Request program details
+              <Link to={`/pilots?product=${product.product}`} className="btn-secondary mt-6 h-11 px-6 text-sm">
+                Express pilot interest
               </Link>
             </article>
           ))}

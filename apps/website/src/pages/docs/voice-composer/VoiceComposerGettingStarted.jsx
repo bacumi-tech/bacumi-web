@@ -5,6 +5,8 @@ const VoiceComposerGettingStarted = () => (
   <VoiceComposerDocsLayout>
     <h1>Getting Started</h1>
 
+    <p><strong>Voice Composer is in development and is not generally available.</strong> This guide describes the current macOS development workflow.</p>
+
     <p>
       Voice Composer is designed to be invoked on demand. You choose when to record, review the result,
       and decide whether to insert it.

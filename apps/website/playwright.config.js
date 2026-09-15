@@ -14,7 +14,12 @@ export default defineConfig({
     trace: 'retain-on-failure'
   },
   webServer: {
-    command: 'pnpm run preview --host 127.0.0.1 --port 4173',
+    command: 'pnpm run build && pnpm run preview --host 127.0.0.1 --port 4173',
+    env: {
+      ...process.env,
+      VITE_INTAKE_ENABLED: 'true',
+      VITE_INTAKE_TIMEOUT_MS: '120'
+    },
     port: 4173,
     reuseExistingServer: !process.env.CI
   },

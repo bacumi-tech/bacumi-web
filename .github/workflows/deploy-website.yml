@@ -1,0 +1,173 @@
+name: Deploy website
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Protected Azure environment to deploy
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      intake_presentation_enabled:
+        description: Show enabled forms; the backend kill switch remains authoritative
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ inputs.environment }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VITE_INTAKE_ENABLED: ${{ inputs.intake_presentation_enabled }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up pnpm and Node.js
+        uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2
+        with:
+          version: 11.15.1
+          runtime: node@24.13.0
+          cache: true
+          install: false
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Lint
+        run: pnpm lint
+      - name: Test
+        run: pnpm test
+      - name: Build with intake presentation disabled by default
+        run: pnpm build
+      - name: Run browser checks
+        run: pnpm test:e2e
+      - name: Upload verified website
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: website-${{ github.sha }}
+          path: apps/website/dist
+          if-no-files-found: error
+          retention-days: 3
+
+  what-if:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: website-${{ inputs.environment }}
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+      RESOURCE_PREFIX: ${{ vars.RESOURCE_PREFIX || 'bacumi' }}
+      BACKEND_FUNCTION_RESOURCE_ID: ${{ vars.BACKEND_FUNCTION_RESOURCE_ID }}
+      BACKEND_REGION: ${{ vars.BACKEND_REGION }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Build Bicep template
+        run: az bicep build --file infra/website/main.bicep
+      - name: Sign in to Azure with OIDC
+        uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Review Azure changes
+        shell: bash
+        run: |
+          test -n "$AZURE_RESOURCE_GROUP"
+          test -n "$AZURE_LOCATION"
+          test -n "$RESOURCE_PREFIX"
+          test -n "$BACKEND_FUNCTION_RESOURCE_ID"
+          test -n "$BACKEND_REGION"
+          az deployment group what-if \
+            --name "website-${{ inputs.environment }}-${{ github.run_number }}" \
+            --resource-group "$AZURE_RESOURCE_GROUP" \
+            --template-file infra/website/main.bicep \
+            --no-pretty-print \
+            --parameters \
+              environmentName="${{ inputs.environment }}" \
+              location="$AZURE_LOCATION" \
+              resourcePrefix="$RESOURCE_PREFIX" \
+              backendFunctionResourceId="$BACKEND_FUNCTION_RESOURCE_ID" \
+              backendRegion="$BACKEND_REGION"
+
+  deploy:
+    needs: what-if
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: website-${{ inputs.environment }}
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+      RESOURCE_PREFIX: ${{ vars.RESOURCE_PREFIX || 'bacumi' }}
+      BACKEND_FUNCTION_RESOURCE_ID: ${{ vars.BACKEND_FUNCTION_RESOURCE_ID }}
+      BACKEND_REGION: ${{ vars.BACKEND_REGION }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Download verified website
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: website-${{ github.sha }}
+          path: website-dist
+      - name: Sign in to Azure with OIDC
+        uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy Static Web App and linked backend
+        id: infrastructure
+        shell: bash
+        run: |
+          deployment_name="website-${{ inputs.environment }}-${{ github.run_number }}"
+          az deployment group create \
+            --name "$deployment_name" \
+            --resource-group "$AZURE_RESOURCE_GROUP" \
+            --template-file infra/website/main.bicep \
+            --parameters \
+              environmentName="${{ inputs.environment }}" \
+              location="$AZURE_LOCATION" \
+              resourcePrefix="$RESOURCE_PREFIX" \
+              backendFunctionResourceId="$BACKEND_FUNCTION_RESOURCE_ID" \
+              backendRegion="$BACKEND_REGION" \
+            --only-show-errors
+          static_web_app_name="$(az deployment group show \
+            --name "$deployment_name" \
+            --resource-group "$AZURE_RESOURCE_GROUP" \
+            --query properties.outputs.staticWebAppName.value \
+            --output tsv)"
+          test -n "$static_web_app_name"
+          deployment_token="$(az staticwebapp secrets list \
+            --name "$static_web_app_name" \
+            --resource-group "$AZURE_RESOURCE_GROUP" \
+            --query properties.apiKey \
+            --output tsv)"
+          test -n "$deployment_token"
+          echo "::add-mask::$deployment_token"
+          echo "deployment_token=$deployment_token" >> "$GITHUB_OUTPUT"
+      - name: Upload verified static content
+        uses: Azure/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9
+        with:
+          azure_static_web_apps_api_token: ${{ steps.infrastructure.outputs.deployment_token }}
+          action: upload
+          app_location: website-dist
+          api_location: ''
+          output_location: ''
+          skip_app_build: true
