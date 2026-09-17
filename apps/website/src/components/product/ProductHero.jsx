@@ -43,7 +43,7 @@ const ProductHero = ({ title, subtitle, cta, preview, image, flushPreview = fals
 
           <div className="mx-auto mt-10 max-w-5xl">
             <div className="rounded-2xl border border-surface-border bg-white p-2 shadow-[0_20px_40px_-30px_rgba(56,34,80,0.6)]">
-              <div className={`overflow-hidden rounded-xl ${flushPreview ? 'bg-[#68368e]' : 'bg-white'}`}>
+              <div className={`overflow-hidden rounded-xl ${flushPreview ? 'bg-[#0F1115]' : 'bg-white'}`}>
                 {preview || <img src={image} alt="Product preview" className="block w-full h-auto" />}
               </div>
             </div>
