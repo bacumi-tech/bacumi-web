@@ -8,14 +8,27 @@ const pulseFeatures = [
   'Staleness and recency visibility',
   'Checks popover and reviewer signals',
   'Filtering, search, sorting, and pagination',
-  'Manual refresh and optional enrichment hooks'
+  'Manual refresh and links back to Azure DevOps'
+];
+
+const freeExtensions = [
+  {
+    name: 'Treefold',
+    to: '/products/treefold',
+    summary: 'Export Azure Boards queries to Excel with the hierarchy, chosen columns, and readable rich text intact.'
+  },
+  {
+    name: 'Tagfold',
+    to: '/products/tagfold',
+    summary: 'See every work item tag with a usage count, spot near-duplicates, and rename, merge, or delete tags safely.'
+  }
 ];
 
 const roadmapProducts = [
   {
     name: 'PR Pulse Pro',
     status: 'Design Partner',
-    summary: 'A future paid product focused on 90-day flow history, configurable stale thresholds, and weekly Teams digests.'
+    summary: 'A planned paid upgrade to PR Pulse with weekly reports, flow metrics, and attention signals, designed to run in your browser without a Bacumi backend. Pricing has not been announced.'
   },
   {
     name: 'Company Verify',
@@ -32,7 +45,7 @@ const Pricing = () => {
           <span className="label-chip">Pricing and packaging</span>
           <h1 className="mt-5 text-4xl font-bold md:text-6xl">Transparent pricing by product stage</h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-600 md:text-xl">
-            PR Pulse is live and free today. Future products are being scoped through design-partner conversations before commercial packaging.
+            PR Pulse is live and free today. Treefold and Tagfold will also be free when they arrive on the Visual Studio Marketplace. Future paid products are being scoped through design-partner conversations before commercial packaging.
           </p>
         </div>
       </section>
@@ -59,6 +72,25 @@ const Pricing = () => {
               Open PR Pulse details
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="layout-container mt-12">
+        <h2 className="text-3xl font-bold md:text-4xl">Free Azure DevOps extensions, coming soon</h2>
+        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          {freeExtensions.map((product) => (
+            <article key={product.name} className="surface-card flex h-full flex-col p-6">
+              <h3 className="text-2xl font-bold">{product.name}</h3>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <span className="stage-live w-fit rounded-full px-2.5 py-1 text-xs font-bold">Free</span>
+                <span className="stage-early w-fit rounded-full px-2.5 py-1 text-xs font-bold">Coming Soon</span>
+              </div>
+              <p className="mt-4 flex-grow text-slate-600">{product.summary}</p>
+              <Link to={product.to} className="btn-secondary mt-6 h-11 px-6 text-sm">
+                Open {product.name} details
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
 

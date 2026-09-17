@@ -20,7 +20,19 @@
   </url>
   <url>
     <loc>https://bacumi.com/products/pr-pulse-pro</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bacumi.com/products/treefold</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bacumi.com/products/tagfold</loc>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -98,7 +110,7 @@
   </url>
   <url>
     <loc>https://bacumi.com/docs/pr-pulse</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -133,6 +145,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://bacumi.com/docs/treefold</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bacumi.com/docs/tagfold</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://bacumi.com/about</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -140,7 +164,7 @@
   </url>
   <url>
     <loc>https://bacumi.com/pricing</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -158,7 +182,7 @@
   </url>
   <url>
     <loc>https://bacumi.com/legal/privacy</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

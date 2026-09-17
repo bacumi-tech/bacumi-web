@@ -53,7 +53,7 @@ const BusinessSoftware = () => (
         <article className="surface-card p-6">
           <div className="mb-3 inline-flex rounded-lg bg-primary/10 p-2 text-primary"><Activity size={20} /></div>
           <h2 className="text-2xl font-bold">Engineering</h2>
-          <p className="mt-3 text-slate-600">PR Pulse is live today. PR Pulse Pro is the bounded next product after the shared foundation milestone.</p>
+          <p className="mt-3 text-slate-600">PR Pulse is live today. Treefold and Tagfold, two free Azure DevOps extensions, are coming soon. PR Pulse Pro is the bounded next paid product.</p>
         </article>
         <article className="surface-card p-6">
           <div className="mb-3 inline-flex rounded-lg bg-accent/15 p-2 text-accent"><BadgeCheck size={20} /></div>

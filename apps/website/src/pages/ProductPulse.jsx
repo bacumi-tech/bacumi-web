@@ -53,7 +53,7 @@ const ProductPulse = () => {
             </span>
             <h2 className="mt-4 text-3xl font-bold md:text-4xl">Spot bottlenecks instantly</h2>
             <p className="mt-4 text-lg text-slate-600">
-              PR Pulse combines check outcomes, reviewer status, and staleness alerts so teams can reduce review latency and keep releases predictable.
+              PR Pulse combines check outcomes, reviewer status, and staleness signals so teams can reduce review latency and keep releases predictable.
             </p>
             <div className="mt-7 space-y-4">
               {valuePoints.map((point) => (

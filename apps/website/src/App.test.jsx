@@ -32,10 +32,12 @@ const documentationRoutes = [
   ['/docs/pr-pulse/personal-views', /Personal Views/i],
   ['/docs/pr-pulse/pr-details', /PR Details and Quick Actions/i],
   ['/docs/pr-pulse/team-insights', /Team Insights/i],
+  ['/docs/treefold', /Treefold Documentation/i],
+  ['/docs/tagfold', /Tagfold Documentation/i],
   ...macAppDocumentationRoutes
 ];
 
-const approvedProducts = ['PR Pulse', 'PR Pulse Pro', 'Company Verify'];
+const approvedProducts = ['PR Pulse', 'Treefold', 'Tagfold', 'PR Pulse Pro', 'Company Verify'];
 const plannedDesktopApps = [
   'Voice Composer',
   'Screenshot Search',
@@ -182,6 +184,8 @@ describe('compatibility redirects', () => {
 describe('product contact calls to action', () => {
   const contactCallsToAction = [
     ['/products/pr-pulse-pro', /Help shape PR Pulse Pro/i, 'Discuss a design partnership'],
+    ['/products/treefold', /Coming soon to the Visual Studio Marketplace/i, 'Contact Bacumi'],
+    ['/products/tagfold', /Coming soon to the Visual Studio Marketplace/i, 'Contact Bacumi'],
     ['/products/company-verify', /Validate the workflow with us/i, 'Join the design partner program']
   ];
 
@@ -251,6 +255,32 @@ describe('documentation shell', () => {
     expect(sidebar.querySelector('a[href="/docs/pr-pulse"]')?.getAttribute('aria-current')).toBeNull();
     expect(pagination.querySelector('a[href="/docs/pr-pulse"]')?.textContent).toContain('Introduction');
     expect(pagination.querySelector('a[href="/docs/pr-pulse/personal-views"]')?.textContent).toContain('Personal Views');
+  });
+});
+
+describe('coming-soon Azure DevOps extensions', () => {
+  it.each([
+    ['/products/treefold', 'Treefold for Azure DevOps'],
+    ['/products/tagfold', 'Tagfold for Azure DevOps'],
+    ['/docs/treefold', 'Treefold Documentation'],
+    ['/docs/tagfold', 'Tagfold Documentation']
+  ])('does not link %s to an unpublished Marketplace listing', (path, heading) => {
+    renderApp(path);
+
+    expect(screen.getByRole('heading', { level: 1, name: heading })).toBeTruthy();
+    expect(screen.getAllByText(/Coming soon to the Visual Studio Marketplace/i).length).toBeGreaterThan(0);
+    const marketplaceLinks = screen
+      .queryAllByRole('link')
+      .filter((link) => (link.getAttribute('href') ?? '').includes('marketplace.visualstudio.com'));
+    expect(marketplaceLinks).toHaveLength(0);
+  });
+
+  it('renders extension documentation in its own sidebar without PR Pulse navigation', () => {
+    renderApp('/docs/treefold');
+
+    const sidebar = screen.getByRole('navigation', { name: 'Treefold documentation' });
+    expect(sidebar.querySelector('a[href="/docs/treefold"]')?.getAttribute('aria-current')).toBe('page');
+    expect(screen.queryByRole('navigation', { name: 'PR Pulse documentation' })).toBeNull();
   });
 });
 
@@ -338,5 +368,20 @@ describe('global public truth', () => {
     expect(screen.getByText(/Bacumi SRL is the data controller for this website/i)).toBeTruthy();
     expect(screen.getAllByRole('link', { name: 'support@bacumi.com' }).length).toBeGreaterThan(0);
     expect(screen.queryByText(/pre-incorporation|updated at incorporation/i)).toBeNull();
+  });
+
+  it('describes Azure DevOps extension data handling in the privacy policy', () => {
+    renderApp('/legal/privacy');
+
+    expect(screen.getByRole('heading', { name: /Azure DevOps extensions/i })).toBeTruthy();
+    expect(screen.getByText(/do not collect usage analytics or telemetry/i)).toBeTruthy();
+    expect(screen.getByText(/does not receive pull request, work item, query, or tag data/i)).toBeTruthy();
+  });
+
+  it('does not claim PR Pulse collects analytics', () => {
+    renderApp('/docs/pr-pulse');
+
+    expect(screen.getByText(/PR Pulse does not collect usage analytics/i)).toBeTruthy();
+    expect(screen.queryByText(/Optional analytics/i)).toBeNull();
   });
 });

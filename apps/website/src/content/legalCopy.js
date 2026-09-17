@@ -1,7 +1,7 @@
 import { contacts } from './siteCopy';
 
 export const legalMeta = {
-  privacyLastUpdated: 'August 24, 2026',
+  privacyLastUpdated: 'September 17, 2026',
   termsLastUpdated: 'August 24, 2026',
   gdprLastUpdated: 'August 24, 2026'
 };
@@ -15,7 +15,7 @@ export const legalEntity = {
 
 export const privacySections = {
   scope:
-    'This Privacy Policy describes how Bacumi SRL handles personal data when you use our website and support channels.',
+    'This Privacy Policy describes how Bacumi SRL handles personal data when you use our website, our support channels, and our Azure DevOps extensions.',
   dataCategories: [
     'Account and contact data you provide to us, such as name, work email, and organization details.',
     'Service usage metadata needed to operate and support our services, such as request timestamps, feature usage events, and error logs.',
@@ -48,7 +48,31 @@ export const privacySections = {
     'Lodge a complaint with a supervisory authority.'
   ],
   rightsContact:
-    'To exercise privacy rights, contact support@bacumi.com. We may request verification to protect account security.'
+    'To exercise privacy rights, contact support@bacumi.com. We may request verification to protect account security.',
+  azureDevOpsExtensions: {
+    intro:
+      'This section covers the Bacumi extensions for Azure DevOps: PR Pulse, available on the Visual Studio Marketplace, and Treefold and Tagfold, which are coming soon. These extensions run in your browser, inside your own Azure DevOps organization.',
+    practices: [
+      "The extensions call your own Azure DevOps organization's APIs with the signed-in user's Azure DevOps sign-in and permissions. They can only read or change what that user is already allowed to access.",
+      'Bacumi does not operate a server for these extensions. Bacumi does not receive pull request, work item, query, or tag data from them.',
+      'The extensions do not collect usage analytics or telemetry.',
+      'Treefold workbooks are generated in your browser and saved to your own device.'
+    ],
+    permissions: [
+      'PR Pulse requests vso.code, read-only access to repositories and pull requests.',
+      'Treefold requests vso.work, read-only access to work items and queries.',
+      'Tagfold requests vso.work_write, read and write access to work items, used to rename, merge, and delete tags.'
+    ],
+    storage: [
+      "PR Pulse remembers your column widths in your browser's local storage on your device.",
+      'Treefold remembers your export choices (columns per query, hierarchy layout, and rich-text option) in Azure DevOps extension data storage, scoped to your user and kept within your Azure DevOps organization.',
+      'Tagfold does not store preferences.'
+    ],
+    microsoft:
+      'Azure DevOps and the Visual Studio Marketplace are operated by Microsoft, which processes data in those services under its own terms and privacy statement.',
+    support:
+      'If you contact support@bacumi.com about an extension, we handle the information you choose to send as support and communications data under this policy.'
+  }
 };
 
 export const termsSections = {

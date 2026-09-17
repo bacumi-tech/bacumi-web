@@ -49,7 +49,7 @@ const About = () => {
         <div className="section-block p-7 md:p-9">
           <h2 className="text-2xl font-bold md:text-3xl">How we position our portfolio</h2>
           <p className="mt-4 text-slate-600">
-            PR Pulse for Azure DevOps is the live flagship product. The roadmap proceeds deliberately from the shared foundation to PR Pulse Pro and then Company Verify, with scope validated before each build stage.
+            PR Pulse for Azure DevOps is the live flagship product, with Treefold and Tagfold, two free Azure DevOps extensions, coming soon. The roadmap proceeds deliberately from the shared foundation to PR Pulse Pro and then Company Verify, with scope validated before each build stage.
           </p>
         </div>
       </section>

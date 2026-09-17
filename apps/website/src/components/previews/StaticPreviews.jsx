@@ -18,7 +18,7 @@ export const PulseStaticPreview = () => (
       <span className="rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">All PRs</span>
       <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">My PRs</span>
       <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">My Reviews</span>
-      <span className="ml-auto rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">Preview Data</span>
+      <span className="ml-auto rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Preview Data</span>
     </div>
     <div className="mb-4 grid grid-cols-3 gap-2 text-xs">
       <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">

@@ -70,7 +70,7 @@ export const PulseDashboardPreview = () => (
 
     {/* Tab bar */}
     <div className="flex border-b border-slate-200 mb-3 px-1">
-      <div className="px-3 py-2 text-xs font-bold text-blue-600 border-b-2 border-blue-600">All PRs <span className="ml-1 px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded-full text-[10px]">24</span></div>
+      <div className="px-3 py-2 text-xs font-bold text-primary border-b-2 border-primary">All PRs <span className="ml-1 px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded-full text-[10px]">24</span></div>
       <div className="px-3 py-2 text-xs font-semibold text-slate-400">My PRs <span className="ml-1 px-1.5 py-0.5 bg-slate-50 text-slate-300 rounded-full text-[10px]">3</span></div>
       <div className="px-3 py-2 text-xs font-semibold text-slate-400">My Reviews <span className="ml-1 px-1.5 py-0.5 bg-slate-50 text-slate-300 rounded-full text-[10px]">8</span></div>
     </div>
@@ -92,7 +92,7 @@ export const PulseDashboardPreview = () => (
           {prs.map(pr => (
             <tr key={pr.id} className="hover:bg-slate-50 transition-colors">
               <td className={`w-1 p-0 ${staleBar[pr.status]}`} />
-              <td className="px-3 py-2.5 font-semibold text-blue-600">#{pr.id}</td>
+              <td className="px-3 py-2.5 font-semibold text-primary">#{pr.id}</td>
               <td className="px-3 py-2.5 max-w-[160px]">
                 <div className="font-semibold text-slate-800 truncate leading-tight">{pr.title}</div>
                 <div className="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
@@ -182,11 +182,11 @@ export const PulseTriagePreview = () => (
         <span className="text-xs text-slate-300">Search PRs…</span>
       </div>
       <div className="ml-auto flex items-center gap-1.5 flex-wrap">
-        <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-full px-2 py-0.5 text-[10px] font-bold">
-          Repo: platform-api <span className="text-blue-400 ml-0.5 cursor-pointer">×</span>
+        <span className="inline-flex items-center gap-1 bg-primary/10 text-primary border border-primary/20 rounded-full px-2 py-0.5 text-[10px] font-bold">
+          Repo: platform-api <span className="text-primary/60 ml-0.5 cursor-pointer">×</span>
         </span>
-        <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-full px-2 py-0.5 text-[10px] font-bold">
-          Author: Alice <span className="text-blue-400 ml-0.5 cursor-pointer">×</span>
+        <span className="inline-flex items-center gap-1 bg-primary/10 text-primary border border-primary/20 rounded-full px-2 py-0.5 text-[10px] font-bold">
+          Author: Alice <span className="text-primary/60 ml-0.5 cursor-pointer">×</span>
         </span>
         <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-500 border border-slate-200 rounded-full px-2 py-0.5 text-[10px] font-semibold cursor-pointer hover:bg-slate-200">
           + Status
@@ -221,7 +221,7 @@ export const PulseTriagePreview = () => (
           {filteredPrs.map(pr => (
             <tr key={pr.id} className="hover:bg-slate-50 transition-colors">
               <td className={`w-1 p-0 ${pr.status === 'At Risk' ? 'bg-amber-500' : 'bg-emerald-500'}`} />
-              <td className="px-3 py-2.5 font-semibold text-blue-600">#{pr.id}</td>
+              <td className="px-3 py-2.5 font-semibold text-primary">#{pr.id}</td>
               <td className="px-3 py-2.5 max-w-[160px]">
                 <div className="font-semibold text-slate-800 truncate leading-tight">{pr.title}</div>
                 <div className="text-[10px] text-slate-400 mt-0.5">{pr.author}</div>
@@ -262,7 +262,7 @@ export const PulseReviewerPreview = () => (
     {/* Dialog header */}
     <div className="flex items-center justify-between mb-5 pb-4 border-b border-slate-100">
       <span className="text-xs font-bold tracking-widest uppercase text-slate-800">Reviewer Load</span>
-      <span className="text-xs text-blue-600 font-semibold">Project Avg: 3.0 PRs</span>
+      <span className="text-xs text-primary font-semibold">Project Avg: 3.0 PRs</span>
     </div>
 
     {/* Reviewer rows */}
@@ -284,7 +284,7 @@ export const PulseReviewerPreview = () => (
     </div>
 
     {/* Health check footer */}
-    <p className="text-xs text-blue-600 italic text-center mt-5 pt-4 border-t border-slate-100">
+    <p className="text-xs text-primary italic text-center mt-5 pt-4 border-t border-slate-100">
       Health Check: Eve Johnson is available to pick up new reviews.
     </p>
   </div>

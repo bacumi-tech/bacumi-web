@@ -23,6 +23,20 @@ export const documentationProducts = [
     platform: 'Azure DevOps extension'
   },
   {
+    key: 'treefold',
+    title: 'Treefold',
+    description: 'Export Azure Boards queries to Excel with the hierarchy intact. Coming soon.',
+    to: '/docs/treefold',
+    platform: 'Azure DevOps extension'
+  },
+  {
+    key: 'tagfold',
+    title: 'Tagfold',
+    description: 'Rename, merge, and delete work item tags safely. Coming soon.',
+    to: '/docs/tagfold',
+    platform: 'Azure DevOps extension'
+  },
+  {
     key: 'voice-composer',
     title: 'Voice Composer',
     description: 'Local-first macOS dictation with review, formatting, and text insertion.',

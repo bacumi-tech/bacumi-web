@@ -1,6 +1,8 @@
 import React from 'react';
 import { legalEntity, legalMeta, privacySections } from '../content/legalCopy';
 
+const extensions = privacySections.azureDevOpsExtensions;
+
 const PrivacyPolicy = () => {
   return (
     <div className="page-shell">
@@ -26,7 +28,31 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold">2. Data categories</h2>
+            <h2 className="text-2xl font-bold">2. Azure DevOps extensions</h2>
+            <p className="mt-3 text-slate-700">{extensions.intro}</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
+              {extensions.practices.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="mt-4 text-slate-700">Each extension requests only the Azure DevOps scope it needs:</p>
+            <ul className="mt-2 list-disc space-y-2 pl-5 text-slate-700">
+              {extensions.permissions.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="mt-4 text-slate-700">Preferences the extensions remember:</p>
+            <ul className="mt-2 list-disc space-y-2 pl-5 text-slate-700">
+              {extensions.storage.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="mt-3 text-slate-700">{extensions.microsoft}</p>
+            <p className="mt-3 text-slate-700">{extensions.support}</p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold">3. Data categories</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
               {privacySections.dataCategories.map((item) => (
                 <li key={item}>{item}</li>
@@ -35,7 +61,7 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold">3. Purposes and legal bases</h2>
+            <h2 className="text-2xl font-bold">4. Purposes and legal bases</h2>
             <p className="mt-3 text-slate-700">We process data for the following purposes:</p>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-slate-700">
               {privacySections.purposes.map((item) => (
@@ -51,18 +77,18 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold">4. Retention</h2>
+            <h2 className="text-2xl font-bold">5. Retention</h2>
             <p className="mt-3 text-slate-700">{privacySections.retention}</p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold">5. Subprocessors and transfers</h2>
+            <h2 className="text-2xl font-bold">6. Subprocessors and transfers</h2>
             <p className="mt-3 text-slate-700">{privacySections.subprocessors}</p>
             <p className="mt-3 text-slate-700">{privacySections.transfers}</p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold">6. Your rights</h2>
+            <h2 className="text-2xl font-bold">7. Your rights</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
               {privacySections.rights.map((item) => (
                 <li key={item}>{item}</li>

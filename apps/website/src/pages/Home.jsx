@@ -39,7 +39,8 @@ const Home = () => {
               <p className="mt-3 text-slate-600">{productLines[0].description}</p>
               <ul className="mt-5 space-y-2 text-sm text-slate-700">
                 <li className="flex items-start gap-2"><Users size={16} className="mt-0.5 text-primary" /> Multi-repository PR visibility</li>
-                <li className="flex items-start gap-2"><Clock3 size={16} className="mt-0.5 text-primary" /> Planned historical flow metrics</li>
+                <li className="flex items-start gap-2"><FileSpreadsheet size={16} className="mt-0.5 text-primary" /> Query export and tag cleanup, coming soon</li>
+                <li className="flex items-start gap-2"><Clock3 size={16} className="mt-0.5 text-primary" /> Planned flow metrics and reports</li>
                 <li className="flex items-start gap-2"><Activity size={16} className="mt-0.5 text-primary" /> Team and personal execution views</li>
               </ul>
               <Link to={productLines[0].to} className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">Explore business software <ArrowRight size={15} /></Link>

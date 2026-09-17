@@ -9,8 +9,9 @@ const DocsHub = () => (
       <article className="docs-article page-header px-6 py-10 md:px-10 md:py-12">
         <h1>Bacumi Documentation</h1>
         <p>
-          Product documentation for Bacumi&apos;s live Azure DevOps extension and the macOS desktop apps
-          currently in development.
+          Product documentation for Bacumi&apos;s live Azure DevOps extension, PR Pulse; the Treefold and
+          Tagfold extensions coming soon to the Visual Studio Marketplace; and the macOS desktop apps currently
+          in development.
         </p>
       </article>
 

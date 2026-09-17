@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import DocsLayout from '../../components/docs/DocsLayout';
 
 const PrPulseDocsIndex = () => (
@@ -6,8 +7,10 @@ const PrPulseDocsIndex = () => (
     <h1>PR Pulse Documentation</h1>
 
     <p>
-      Bacumi currently offers one publicly available extension for users: <strong>PR Pulse</strong>.
-      This documentation focuses on using PR Pulse inside Azure DevOps.
+      Bacumi currently offers one publicly available Azure DevOps extension: <strong>PR Pulse</strong>.
+      Two free extensions, <Link to="/docs/treefold">Treefold</Link> and{' '}
+      <Link to="/docs/tagfold">Tagfold</Link>, are coming soon to the Visual Studio Marketplace. This
+      documentation focuses on using PR Pulse inside Azure DevOps.
     </p>
 
     <h2>Who This Is For</h2>
@@ -24,20 +27,20 @@ const PrPulseDocsIndex = () => (
           Visual Studio Marketplace
         </a>.
       </li>
-      <li>Open PR Pulse inside your Azure DevOps project.</li>
+      <li>Open <strong>Repos → PR Pulse</strong> in any project.</li>
       <li>Use these pages to understand the available views, filters, and workflows.</li>
     </ol>
 
     <h2>Privacy and Security</h2>
     <p>
-      The core PR Pulse dashboard is client-first and uses the read-only Azure DevOps code scope.
-      It processes current-project pull request data in the extension without requiring a Bacumi
-      backend for the core dashboard.
+      PR Pulse uses the read-only <code>vso.code</code> scope. Pull request data is read from your Azure
+      DevOps organization with your own sign-in and rendered in your browser. Nothing is sent to Bacumi,
+      and PR Pulse has no Bacumi backend.
     </p>
     <p>
-      Optional analytics initializes only when it is configured and supported by the browser. When
-      enabled, it may transmit usage events and organization and project context. When it is not
-      configured, analytics calls do not transmit those events.
+      PR Pulse does not collect usage analytics. The only thing it remembers is your column widths, stored
+      in your browser&apos;s local storage. See the <Link to="/legal/privacy">Privacy Policy</Link> for
+      details.
     </p>
   </DocsLayout>
 );

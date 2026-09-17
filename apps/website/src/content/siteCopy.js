@@ -32,7 +32,7 @@ export const solutionTracks = [
     id: 'engineering',
     title: 'Engineering',
     description:
-      'Pull request operations today, with bounded engineering flow intelligence planned next.',
+      'Pull request operations today, free work item export and tag cleanup coming soon, and bounded engineering flow intelligence planned next.',
     status: 'PR Pulse live'
   },
   {
@@ -57,12 +57,32 @@ export const solutions = [
     flagship: true
   },
   {
+    key: 'treefold',
+    to: '/products/treefold',
+    title: 'Treefold',
+    subtitle: 'Query Export to Excel',
+    description:
+      'Free Azure DevOps extension that exports Azure Boards queries to Excel with the hierarchy, chosen columns, and readable rich text intact.',
+    stage: 'Coming Soon',
+    track: 'Engineering'
+  },
+  {
+    key: 'tagfold',
+    to: '/products/tagfold',
+    title: 'Tagfold',
+    subtitle: 'Work Item Tag Cleanup',
+    description:
+      'Free Azure DevOps extension that shows every work item tag with a usage count and lets you rename, merge, or delete tags safely.',
+    stage: 'Coming Soon',
+    track: 'Engineering'
+  },
+  {
     key: 'pr-pulse-pro',
     to: '/products/pr-pulse-pro',
     title: 'PR Pulse Pro',
     subtitle: 'Engineering Flow Intelligence',
     description:
-      'Historical flow metrics, stale-work policies, and weekly Teams digests for Azure DevOps organizations.',
+      'Planned weekly reports, flow metrics, and attention signals for Azure DevOps, designed to run in your browser without a Bacumi backend.',
     stage: 'Coming Soon',
     track: 'Engineering'
   },
@@ -258,7 +278,7 @@ export const navLinks = {
 };
 
 export const roadmap = {
-  now: 'PR Pulse is live for Azure DevOps pull request operations. The shared product and Azure foundation is the next delivery milestone.',
+  now: 'PR Pulse is live for Azure DevOps pull request operations. Treefold and Tagfold, two free Azure DevOps extensions, are coming soon to the Visual Studio Marketplace.',
   next: 'Planned sequence: Foundation → PR Pulse Pro → Company Verify. Future products move forward through explicit validation gates.'
 };
 

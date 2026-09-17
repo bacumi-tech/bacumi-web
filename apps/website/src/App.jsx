@@ -13,6 +13,8 @@ import FilteringSearchDocs from './pages/docs/FilteringSearchDocs';
 import PersonalViewsDocs from './pages/docs/PersonalViewsDocs';
 import PrDetailsDocs from './pages/docs/PrDetailsDocs';
 import PrPulseDocsIndex from './pages/docs/PrPulseDocsIndex';
+import TagfoldDocs from './pages/docs/TagfoldDocs';
+import TreefoldDocs from './pages/docs/TreefoldDocs';
 import TeamInsightsDocs from './pages/docs/TeamInsightsDocs';
 import DocsHub from './pages/docs/DocsHub';
 import VoiceComposerDocsIndex from './pages/docs/voice-composer/VoiceComposerDocsIndex';
@@ -28,6 +30,8 @@ import DeveloperScratchpadPrivacyDocs from './pages/docs/developer-scratchpad/De
 import ProductCompanyVerify from './pages/ProductCompanyVerify';
 import ProductPulse from './pages/ProductPulse';
 import ProductPulsePro from './pages/ProductPulsePro';
+import ProductTagfold from './pages/ProductTagfold';
+import ProductTreefold from './pages/ProductTreefold';
 import BusinessSoftware from './pages/BusinessSoftware';
 import DesktopApps from './pages/DesktopApps';
 import Products from './pages/Products';
@@ -61,6 +65,8 @@ function App() {
         <Route path="/products/desktop-apps" element={<DesktopApps />} />
         <Route path="/products/pulse" element={<ProductPulse />} />
         <Route path="/products/pr-pulse-pro" element={<ProductPulsePro />} />
+        <Route path="/products/treefold" element={<ProductTreefold />} />
+        <Route path="/products/tagfold" element={<ProductTagfold />} />
         <Route path="/products/company-verify" element={<ProductCompanyVerify />} />
         <Route path="/products/pr-pulse" element={<Navigate replace to="/products/pulse" />} />
         <Route path="/products/governance" element={<Navigate replace to="/products" />} />
@@ -73,6 +79,8 @@ function App() {
         <Route path="/docs/pr-pulse/personal-views" element={<PersonalViewsDocs />} />
         <Route path="/docs/pr-pulse/pr-details" element={<PrDetailsDocs />} />
         <Route path="/docs/pr-pulse/team-insights" element={<TeamInsightsDocs />} />
+        <Route path="/docs/treefold" element={<TreefoldDocs />} />
+        <Route path="/docs/tagfold" element={<TagfoldDocs />} />
         <Route path="/docs/voice-composer" element={<VoiceComposerDocsIndex />} />
         <Route path="/docs/voice-composer/getting-started" element={<VoiceComposerGettingStarted />} />
         <Route path="/docs/voice-composer/dictation-workflow" element={<VoiceComposerDictationWorkflow />} />
