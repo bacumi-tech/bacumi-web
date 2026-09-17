@@ -1,13 +1,25 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = document.getElementById('root')
+const app = (
     <React.StrictMode>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </React.StrictMode>,
+    </React.StrictMode>
 )
+
+const canHydrate = import.meta.env.PROD
+    && root.dataset.prerenderPath === window.location.pathname
+    && !window.location.search
+
+if (canHydrate) {
+    hydrateRoot(root, app)
+} else {
+    root.replaceChildren()
+    createRoot(root).render(app)
+}

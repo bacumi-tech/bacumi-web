@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
-import { contacts, navLinks, productLines } from '../content/siteCopy';
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
+import StageBadge from './ui/StageBadge';
+import { contacts, navLinks, navProductMenu, productLines } from '../content/siteCopy';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const productsOpenedByHover = useRef(false);
+  const mobileMenuButtonRef = useRef(null);
 
   const openProductsFromHover = () => {
     productsOpenedByHover.current = true;
@@ -35,10 +37,22 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        mobileMenuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [isOpen]);
+
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 py-2 backdrop-blur-md shadow-[0_8px_24px_-18px_rgba(15,17,21,0.35)]' : 'bg-transparent py-4'
+        scrolled ? 'bg-white/92 py-2 backdrop-blur-md shadow-[0_8px_24px_-18px_rgba(15,17,21,0.35)]' : 'bg-transparent py-4'
       }`}
     >
       <div className="layout-container flex h-16 items-center justify-between">
@@ -47,11 +61,7 @@ const Navbar = () => {
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main">
-          <div
-            className="relative"
-            onMouseEnter={openProductsFromHover}
-            onMouseLeave={closeProducts}
-          >
+          <div className="relative" onMouseEnter={openProductsFromHover} onMouseLeave={closeProducts}>
             <button
               className="nav-link inline-flex items-center gap-1"
               aria-controls="products-menu"
@@ -62,20 +72,73 @@ const Navbar = () => {
               Products <ChevronDown size={16} />
             </button>
             {isProductsOpen && (
-              <div id="products-menu" className="absolute left-0 top-full w-[23rem] pt-3">
-                <div className="section-block p-3">
-                  <p className="px-2 pb-1 text-[11px] font-bold uppercase tracking-[0.14em] text-primary">Product lines</p>
-                  {productLines.map((item) => (
-                    <Link
-                      key={item.to}
-                      to={item.to}
-                      className="mb-1 block rounded-xl px-3 py-2.5 hover:bg-primary/5"
-                      onClick={closeProducts}
-                    >
-                      <span className="font-semibold text-slate-900">{item.title}</span>
-                      <p className="mt-0.5 text-xs text-slate-600">{item.eyebrow}</p>
-                    </Link>
-                  ))}
+              <div id="products-menu" className="nav-mega-menu absolute left-0 top-full pt-3">
+                <div className="section-block p-4">
+                  <div className="mb-4 border-b border-surface-border pb-3">
+                    <p className="nav-mega-column-title">Product lines</p>
+                    {productLines.map((item) => (
+                      <Link
+                        key={item.to}
+                        to={item.to}
+                        className="nav-mega-column-link"
+                        aria-label={`${item.title} ${item.eyebrow}`}
+                        onClick={closeProducts}
+                      >
+                        <span className="nav-mega-item-title">{item.title}</span>
+                        <span className="nav-mega-item-meta">{item.eyebrow}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="nav-mega-grid">
+                    <div>
+                      <p className="nav-mega-column-title">{navProductMenu.business.title}</p>
+                      {navProductMenu.business.items.map((item) => (
+                        <Link
+                          key={item.key}
+                          to={item.to}
+                          className="nav-mega-column-link"
+                          onClick={closeProducts}
+                        >
+                          <span className="nav-mega-item-title">{item.title}</span>
+                          <span className="nav-mega-item-meta">{item.subtitle}</span>
+                          <span className="mt-1.5 inline-flex">
+                            <StageBadge stage={item.stage} />
+                          </span>
+                        </Link>
+                      ))}
+                      <Link to={navProductMenu.business.to} className="nav-mega-view-all" onClick={closeProducts}>
+                        View all business software <ArrowRight size={14} />
+                      </Link>
+                    </div>
+
+                    <div>
+                      <p className="nav-mega-column-title">{navProductMenu.desktop.title}</p>
+                      {navProductMenu.desktop.items.map((item) => (
+                        <Link
+                          key={item.key}
+                          to={item.to}
+                          className="nav-mega-column-link"
+                          onClick={closeProducts}
+                        >
+                          <span className="nav-mega-item-title">{item.title}</span>
+                          <span className="nav-mega-item-meta">{item.subtitle}</span>
+                        </Link>
+                      ))}
+                      <Link to={navProductMenu.desktop.to} className="nav-mega-view-all" onClick={closeProducts}>
+                        View all desktop apps <ArrowRight size={14} />
+                      </Link>
+                    </div>
+
+                    <div>
+                      <p className="nav-mega-column-title">Resources</p>
+                      {navProductMenu.resources.map((item) => (
+                        <Link key={item.to} to={item.to} className="nav-mega-column-link" onClick={closeProducts}>
+                          <span className="nav-mega-item-title">{item.title}</span>
+                          <span className="nav-mega-item-meta">{item.subtitle}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -94,13 +157,15 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link to="/products" className="btn-primary h-10 px-6 text-sm">
-            Explore Products
+          <Link to="/products" className="btn-primary hidden h-10 px-6 text-sm sm:inline-flex">
+            View products
           </Link>
           <button
-            className="rounded-lg border border-surface-border bg-white p-2 text-slate-800 md:hidden"
+            ref={mobileMenuButtonRef}
+            className="rounded-lg border border-surface-border bg-white p-2 text-strong md:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label="Toggle menu"
+            aria-controls="mobile-navigation"
             aria-expanded={isOpen}
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -109,7 +174,7 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="border-t border-surface-border bg-white/95 backdrop-blur md:hidden">
+        <div id="mobile-navigation" className="border-t border-surface-border bg-white/95 backdrop-blur md:hidden">
           <div className="layout-container py-4">
             <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-primary">Products</p>
             <div className="space-y-1">
@@ -120,18 +185,18 @@ const Navbar = () => {
                   className="block rounded-lg px-3 py-2 hover:bg-primary/5"
                   onClick={() => setIsOpen(false)}
                 >
-                  <span className="block font-semibold text-slate-900">{item.title}</span>
-                  <span className="block text-xs text-slate-600">{item.eyebrow}</span>
+                  <span className="block font-semibold text-strong">{item.title}</span>
+                  <span className="block text-xs text-body">{item.eyebrow}</span>
                 </Link>
               ))}
             </div>
-            <p className="mb-2 mt-4 text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Navigation</p>
+            <p className="mb-2 mt-4 text-[11px] font-bold uppercase tracking-[0.14em] text-muted">Navigation</p>
             <div className="space-y-1">
               {navLinks.main.map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="block rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-primary/5 hover:text-primary"
+                  className="block rounded-lg px-3 py-2 font-medium text-body hover:bg-primary/5 hover:text-primary"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
@@ -139,13 +204,13 @@ const Navbar = () => {
               ))}
               <Link
                 to="/docs"
-                className="block rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-primary/5 hover:text-primary"
+                className="block rounded-lg px-3 py-2 font-medium text-body hover:bg-primary/5 hover:text-primary"
                 onClick={() => setIsOpen(false)}
               >
                 Docs
               </Link>
             </div>
-            <div className="mt-4 rounded-xl border border-surface-border bg-surface-light px-3 py-2 text-xs text-slate-600">
+            <div className="mt-4 rounded-xl border border-surface-border bg-surface-light px-3 py-2 text-xs text-body">
               Questions? Reach us at {contacts.support}
             </div>
           </div>

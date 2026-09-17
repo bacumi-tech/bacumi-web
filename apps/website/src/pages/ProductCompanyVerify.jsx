@@ -50,8 +50,8 @@ const ProductCompanyVerify = () => (
       }
       subtitle="A planned Excel-first workflow for Romanian company data and VIES validation, with asynchronous processing and auditable results."
       cta={{
-        text: 'Join the design partner program',
-        link: '/contact',
+        text: 'Apply as a design partner',
+        link: '/pilots?product=company-verify',
         secondary: {
           text: 'Explore solutions',
           link: '/solutions'
@@ -115,8 +115,8 @@ const ProductCompanyVerify = () => (
         <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-600">
           Join a design-partner conversation about the Romania, VIES, and Excel batch workflow.
         </p>
-        <Link to="/contact" className="btn-primary mt-8 h-12 px-8 text-sm md:text-base">
-          Join the design partner program
+        <Link to="/pilots?product=company-verify" className="btn-primary mt-8 h-12 px-8 text-sm md:text-base">
+          Apply as a design partner
         </Link>
       </div>
     </section>

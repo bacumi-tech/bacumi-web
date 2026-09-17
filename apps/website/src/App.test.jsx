@@ -5,8 +5,6 @@ import App from './App';
 import DocsLayout from './components/docs/DocsLayout';
 import { getAdjacentDocs, prPulseDocs } from './content/prPulseDocs';
 import {
-  developerScratchpadDocs,
-  getAdjacentDeveloperScratchpadDocs,
   getAdjacentVoiceComposerDocs,
   voiceComposerDocs
 } from './content/macAppDocs';
@@ -16,12 +14,7 @@ const macAppDocumentationRoutes = [
   ['/docs/voice-composer/getting-started', /Getting Started/i],
   ['/docs/voice-composer/dictation-workflow', /Dictation Workflow/i],
   ['/docs/voice-composer/settings', /Settings & Menu Bar/i],
-  ['/docs/voice-composer/privacy', /Privacy & Local Processing/i],
-  ['/docs/developer-scratchpad', /Developer Scratchpad Documentation/i],
-  ['/docs/developer-scratchpad/getting-started', /Getting Started/i],
-  ['/docs/developer-scratchpad/tools', /Transformation Tools/i],
-  ['/docs/developer-scratchpad/themes', /Themes & Workspace/i],
-  ['/docs/developer-scratchpad/privacy', /Privacy & Offline Operation/i]
+  ['/docs/voice-composer/privacy', /Privacy & Local Processing/i]
 ];
 
 const documentationRoutes = [
@@ -38,17 +31,16 @@ const documentationRoutes = [
 ];
 
 const approvedProducts = ['PR Pulse', 'Treefold', 'Tagfold', 'PR Pulse Pro', 'Company Verify'];
-const plannedDesktopApps = [
-  'Voice Composer',
-  'Screenshot Search',
-  'Audio Inbox',
-  'Clipboard Intelligence',
-  'Semantic File Search',
-  'Workspace Manager',
+const hiddenDesktopApps = [
+  'Matchfold',
+  'SizeTree',
+  'Coverlay',
+  'DataDock',
+  'Doc Lens',
+  'TalkFold',
   'Developer Scratchpad',
-  'Menu Bar Automations',
-  'Smart File Renamer',
-  'Drop Zone / File Converter'
+  'SureCopy',
+  'ImageTo'
 ];
 const hiddenProducts = ['Bacumi Governance', 'Bacumi FinOps', 'Bacumi Tempo', 'GanttFlow'];
 
@@ -86,7 +78,7 @@ const compatibilityRedirects = [
 
 const LocationProbe = () => {
   const location = useLocation();
-  return <output data-testid="current-location">{location.pathname}</output>;
+  return <output data-testid="current-location">{location.pathname}{location.search}</output>;
 };
 
 const renderApp = (initialEntry) =>
@@ -129,40 +121,16 @@ describe('approved public product portfolio', () => {
     });
   });
 
-  it('lists ten macOS-first desktop apps with Coming Soon status and interactive details toggle', () => {
+  it('publishes only Voice Composer from the desktop catalogue', () => {
     renderApp('/products/desktop-apps');
 
     const main = screen.getByRole('main');
-    plannedDesktopApps.forEach((product) => {
-      expect(within(main).getAllByRole('heading', { name: product }).length).toBeGreaterThan(0);
+    expect(within(main).getAllByRole('heading', { name: 'Voice Composer' }).length).toBeGreaterThan(0);
+    hiddenDesktopApps.forEach((product) => {
+      expect(within(main).queryByText(product)).toBeNull();
     });
-    expect(within(main).getAllByText('Coming Soon')).toHaveLength(10);
-    expect(within(main).getAllByText(/macOS first/i).length).toBeGreaterThan(0);
-    expect(within(main).getByText(/individuals and organizations/i)).toBeTruthy();
-    expect(within(main).getByText(/Windows versions may be considered in the future/i)).toBeTruthy();
-
-    // Before clicking details, extended App Store button is not visible and card is 1 column
-    expect(within(main).queryByText('Mac App Store')).toBeNull();
-    const exploreSection = document.getElementById('explore-apps') || main;
-    const voiceComposerHeadings = within(exploreSection).getAllByRole('heading', { name: 'Voice Composer' });
-    const voiceComposerArticle = voiceComposerHeadings[voiceComposerHeadings.length - 1].closest('article');
-    expect(voiceComposerArticle.className).toContain('col-span-1');
-
-    // Click Details on Voice Composer
-    const detailsButton = within(voiceComposerArticle).getByRole('button', { name: /Details/i });
-    fireEvent.click(detailsButton);
-
-    // After clicking details, card expands 2x2 (col-span-2 and row-span-2), vertically, and shows Mac App Store button
-    expect(voiceComposerArticle.className).toContain('md:col-span-2');
-    expect(voiceComposerArticle.className).toContain('md:row-span-2');
-    expect(within(voiceComposerArticle).getByText(/Fast, local-first dictation utility/i)).toBeTruthy();
-    expect(within(voiceComposerArticle).getByText('Mac App Store')).toBeTruthy();
-    expect(within(voiceComposerArticle).getByRole('button', { name: /Less details/i })).toBeTruthy();
-
-    // Click Less details to collapse
-    fireEvent.click(within(voiceComposerArticle).getByRole('button', { name: /Less details/i }));
-    expect(within(voiceComposerArticle).queryByText('Mac App Store')).toBeNull();
-    expect(voiceComposerArticle.className).toContain('col-span-1');
+    expect(within(main).getAllByText('In Development').length).toBeGreaterThan(0);
+    expect(within(main).getAllByText(/Mac App Store and direct\/MDM/i).length).toBeGreaterThan(0);
   });
 });
 
@@ -183,13 +151,11 @@ describe('compatibility redirects', () => {
 
 describe('product contact calls to action', () => {
   const contactCallsToAction = [
-    ['/products/pr-pulse-pro', /Help shape PR Pulse Pro/i, 'Discuss a design partnership'],
-    ['/products/treefold', /Coming soon to the Visual Studio Marketplace/i, 'Contact Bacumi'],
-    ['/products/tagfold', /Coming soon to the Visual Studio Marketplace/i, 'Contact Bacumi'],
-    ['/products/company-verify', /Validate the workflow with us/i, 'Join the design partner program']
+    ['/products/pr-pulse-pro', /Help shape PR Pulse Pro/i, 'Apply for early access', '/pilots?product=pr-pulse-pro'],
+    ['/products/company-verify', /Validate the workflow with us/i, 'Apply as a design partner', '/pilots?product=company-verify']
   ];
 
-  it.each(contactCallsToAction)('navigates the final %s contact CTA through the SPA', async (path, sectionHeading, linkName) => {
+  it.each(contactCallsToAction)('preselects the matching program from the final %s CTA', async (path, sectionHeading, linkName, destination) => {
     renderApp(path);
 
     const section = screen.getByRole('heading', { name: sectionHeading }).closest('section');
@@ -197,9 +163,66 @@ describe('product contact calls to action', () => {
     fireEvent.click(contactLink);
 
     await waitFor(() => {
+      expect(screen.getByTestId('current-location').textContent).toBe(destination);
+    });
+    expect(screen.getByRole('heading', { level: 1, name: 'Apply for a Bacumi pilot' })).toBeTruthy();
+    expect(screen.getByLabelText('Product').value).toBe(destination.split('=').at(-1));
+  });
+});
+
+describe('coming soon extension calls to action', () => {
+  it.each([
+    ['/products/treefold'],
+    ['/products/tagfold']
+  ])('%s links to contact while the extension is not on the Marketplace', async (path) => {
+    renderApp(path);
+
+    const section = screen.getByRole('heading', { name: /Coming soon to the Visual Studio Marketplace/i }).closest('section');
+    fireEvent.click(within(section).getByRole('link', { name: 'Contact Bacumi' }));
+
+    await waitFor(() => {
       expect(screen.getByTestId('current-location').textContent).toBe('/contact');
     });
-    expect(screen.getByRole('heading', { level: 1, name: 'Get in touch' })).toBeTruthy();
+  });
+});
+
+describe('website intake routes', () => {
+  it('renders the working contact form in local test builds', () => {
+    renderApp('/contact');
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Contact Bacumi' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Send message' })).toBeTruthy();
+  });
+
+  it('ignores an unknown pilot preselection', () => {
+    renderApp('/pilots?product=internal-idea');
+
+    expect(screen.getByLabelText('Product').value).toBe('');
+  });
+
+  it('renders a useful application-level not-found page', () => {
+    renderApp('/missing-page');
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Page not found' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Back to home' }).getAttribute('href')).toBe('/');
+  });
+
+  it('updates page metadata for a direct pilot route', () => {
+    renderApp('/pilots?product=voice-composer');
+
+    expect(document.title).toBe('Pilot Applications | Bacumi');
+    expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
+      'https://bacumi.com/pilots'
+    );
+    expect(document.querySelector('meta[property="og:url"]')?.getAttribute('content')).toBe(
+      'https://bacumi.com/pilots'
+    );
+    expect(document.querySelector('meta[name="twitter:title"]')?.getAttribute('content')).toBe(
+      'Pilot Applications | Bacumi'
+    );
+    expect(document.querySelector('meta[name="twitter:description"]')?.getAttribute('content')).toBe(
+      'Apply for consideration for a Bacumi product pilot or design-partner program.'
+    );
   });
 });
 
@@ -215,10 +238,6 @@ describe('documentation shell', () => {
     expect(getAdjacentVoiceComposerDocs('/docs/voice-composer')).toEqual({
       previous: null,
       next: voiceComposerDocs[1]
-    });
-    expect(getAdjacentDeveloperScratchpadDocs('/docs/developer-scratchpad/privacy')).toEqual({
-      previous: developerScratchpadDocs[3],
-      next: null
     });
   });
 
@@ -307,7 +326,7 @@ describe('global public truth', () => {
 
     expect(productsButton.getAttribute('aria-expanded')).toBe('true');
     expect(screen.getByRole('link', { name: 'Bacumi Business Software For operational workflows' })).toBeTruthy();
-    expect(screen.getByRole('link', { name: 'Bacumi Desktop Apps macOS first' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Bacumi Desktop Apps Native Mac apps' })).toBeTruthy();
 
     fireEvent.click(productsButton, { detail: 1 });
     expect(productsButton.getAttribute('aria-expanded')).toBe('false');
@@ -330,6 +349,18 @@ describe('global public truth', () => {
 
     fireEvent.click(productsButton, { detail: 0 });
     expect(productsButton.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('returns focus to the mobile menu button when Escape closes the menu', () => {
+    renderApp('/');
+
+    const menuButton = screen.getByRole('button', { name: 'Toggle menu' });
+    fireEvent.click(menuButton);
+    expect(menuButton.getAttribute('aria-expanded')).toBe('true');
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(menuButton.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(menuButton);
   });
 
   it('uses the documentation hub route in global navigation', () => {

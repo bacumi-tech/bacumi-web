@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="apps/website/public/images/logo.png" alt="Bacumi" width="325">
+  <img src="apps/website/public/brand/bacumi-lockup.png" alt="Bacumi" width="325">
 </p>
 
 # Bacumi Web

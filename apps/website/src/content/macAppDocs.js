@@ -39,16 +39,9 @@ export const documentationProducts = [
   {
     key: 'voice-composer',
     title: 'Voice Composer',
-    description: 'Local-first macOS dictation with review, formatting, and text insertion.',
+    description: 'Product guidance for the Voice Composer dictation app currently in development.',
     to: '/docs/voice-composer',
-    platform: 'macOS app'
-  },
-  {
-    key: 'developer-scratchpad',
-    title: 'Developer Scratchpad',
-    description: 'Offline developer transformations, tabs, and deterministic utilities.',
-    to: '/docs/developer-scratchpad',
-    platform: 'macOS app'
+    platform: 'Desktop app'
   }
 ];
 

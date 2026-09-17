@@ -6,6 +6,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.js'],
+    env: { VITE_INTAKE_ENABLED: 'true' },
     exclude: [...configDefaults.exclude, 'tests/e2e/**']
   }
 });

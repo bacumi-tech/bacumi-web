@@ -21,9 +21,9 @@ export const productLines = [
     key: 'desktop-apps',
     to: '/products/desktop-apps',
     title: 'Bacumi Desktop Apps',
-    eyebrow: 'macOS first',
+    eyebrow: 'Native Mac apps',
     description:
-      'Ten small, practical applications planned for individuals and organizations, each kept deliberately focused.'
+      'Focused native Mac apps for individuals and organizations, beginning with Voice Composer in development.'
   }
 ];
 
@@ -104,161 +104,16 @@ export const desktopApps = [
     title: 'Voice Composer',
     subtitle: 'Local Dictation & Speech Intelligence',
     track: 'Local AI',
-    stage: 'Coming Soon',
-    description: 'Turn spoken thoughts into structured, editable text on your Mac.',
+    stage: 'In Development',
+    description: 'Turn spoken thoughts into structured, editable text with local speech recognition.',
     detailedDescription:
-      'Fast, local-first dictation utility designed for professionals who think faster than they type. Converts spoken thoughts into clean, formatted text in English and Romanian with embedded Whisper speech recognition—running 100% on-device with zero cloud dependencies.',
+      'Voice Composer is being developed as a focused dictation utility. Its current product direction is local speech recognition and an efficient path from spoken thoughts to editable text.',
     features: [
-      'Embedded Whisper speech recognition (English & Romanian)',
-      'Global hotkey with Hold-to-Talk and Toggle modes',
-      'Floating visualizer HUD and instant text insertion',
-      'Zero cloud dependency — microphone audio stays local'
+      'Local speech recognition',
+      'A focused dictation workflow',
+      'Editable output for everyday writing'
     ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'screenshot-search',
-    title: 'Screenshot Search',
-    subtitle: 'Visual & Text OCR Retrieval',
-    track: 'Local AI',
-    stage: 'Coming Soon',
-    description: 'Find screenshots by their visual content and the text they contain.',
-    detailedDescription:
-      'On-device OCR and visual indexer that makes your screenshot library instantly searchable. Find images by keywords, code snippets, UI elements, or dates without uploading anything to the cloud.',
-    features: [
-      'High-performance on-device Apple Vision OCR',
-      'Instant search by visual content and text in images',
-      'Privacy-first local index with zero telemetry'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'audio-inbox',
-    title: 'Audio Inbox',
-    subtitle: 'Voice Note Inbox & Processing',
-    track: 'Audio',
-    stage: 'Coming Soon',
-    description: 'Capture, organize, and process short voice notes in one focused workspace.',
-    detailedDescription:
-      'A dedicated menu-bar inbox for quickly capturing audio memos on the fly. Automatically transcribes voice notes locally and formats them into structured bullet points ready for your notes or task manager.',
-    features: [
-      'Quick menu bar capture with global shortcut',
-      'Automated local transcription and action item tagging',
-      'Direct export to Markdown, Apple Notes, and Obsidian'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'clipboard-intelligence',
-    title: 'Clipboard Intelligence',
-    subtitle: 'Private Clipboard History',
-    track: 'Productivity',
-    stage: 'Coming Soon',
-    description: 'Organize clipboard history and make frequently reused content easier to find.',
-    detailedDescription:
-      'Private, encrypted clipboard history manager with smart categorization. Re-use snippets, code fragments, color codes, and links with instant fuzzy search and automatic secret scrubbing.',
-    features: [
-      'Encrypted local history with sensitive token scrubbing',
-      'Smart categorization for code, links, colors, and text',
-      'Instant fuzzy search and paste preview'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'semantic-file-search',
-    title: 'Semantic File Search',
-    subtitle: 'On-Device Semantic Search',
-    track: 'Local AI',
-    stage: 'Coming Soon',
-    description: 'Search local files by meaning when exact filenames and keywords are not enough.',
-    detailedDescription:
-      'Local semantic search over your folders, PDFs, and notes powered by lightweight on-device vector embeddings. Ask questions in natural language to find the exact paragraph you need.',
-    features: [
-      'On-device neural vector embeddings without internet access',
-      'Indexes Markdown, PDF, TXT, and DOCX files',
-      'Fast natural language querying with relevance scoring'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'workspace-manager',
-    title: 'Workspace Manager',
-    subtitle: 'Window & Context Orchestration',
-    track: 'Productivity',
-    stage: 'Coming Soon',
-    description: 'Open and manage repeatable project workspaces with less setup friction.',
-    detailedDescription:
-      'Save, organize, and restore desktop window layouts, project environments, terminal sessions, and browser tabs for specific workflows with a single shortcut.',
-    features: [
-      'One-click workspace restoration and window positioning',
-      'Multi-display layout preset support',
-      'Terminal and developer tool orchestration'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'developer-scratchpad',
-    title: 'Developer Scratchpad',
-    subtitle: 'Developer Text Transformations',
-    track: 'Developer',
-    stage: 'Coming Soon',
-    description: 'Keep temporary code, commands, notes, and transformations close at hand.',
-    detailedDescription:
-      'A fast floating scratchpad tailored for software developers. Format JSON, decode JWTs, test regular expressions, convert timestamps, and transform text without opening an external web tool.',
-    features: [
-      'Built-in offline tools: JSON format, JWT decode, Base64, Regex',
-      'Persistent multi-tab buffers that survive app restarts',
-      'Syntax highlighting for over 30 languages'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'menu-bar-automations',
-    title: 'Menu Bar Automations',
-    subtitle: 'Menu Bar Script Runner',
-    track: 'Automation',
-    stage: 'Coming Soon',
-    description: 'Run small, repeatable local workflows directly from the macOS menu bar.',
-    detailedDescription:
-      'Execute frequent shell scripts, automations, webhooks, and local commands directly from a lightweight menu bar icon with real-time feedback and execution history.',
-    features: [
-      'One-click execution of custom shell and AppleScript workflows',
-      'Configurable keyboard shortcuts and notification alerts',
-      'Sandboxed execution environment with detailed logs'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'smart-file-renamer',
-    title: 'Smart File Renamer',
-    subtitle: 'Batch File Renaming & Undo',
-    track: 'Productivity',
-    stage: 'Coming Soon',
-    description: 'Preview and apply consistent names to groups of local files.',
-    detailedDescription:
-      'Batch rename photos, documents, and media files with live interactive previews, regex pattern matching, sequence numbering, and full one-click undo support.',
-    features: [
-      'Interactive multi-file preview before changes are committed',
-      'Metadata extraction from EXIF photos and ID3 audio tags',
-      'Full reversible undo history'
-    ],
-    appStoreUrl: '#'
-  },
-  {
-    key: 'drop-zone-file-converter',
-    title: 'Drop Zone / File Converter',
-    subtitle: 'Drag & Drop Format Converter',
-    track: 'Productivity',
-    stage: 'Coming Soon',
-    description: 'Convert common file formats through a simple drag-and-drop workflow.',
-    detailedDescription:
-      'A floating desktop drop zone for instantly converting image formats (PNG, WebP, AVIF, SVG), audio, and documents locally on your Mac with zero file uploads.',
-    features: [
-      'Instant drag-and-drop file format conversions',
-      '100% offline and secure local processing',
-      'Customizable compression and quality presets'
-    ],
-    appStoreUrl: '#'
+    pilotTo: '/pilots?product=voice-composer'
   }
 ];
 
@@ -266,6 +121,7 @@ export const navLinks = {
   main: [
     { to: '/products', label: 'Products' },
     { to: '/pricing', label: 'Pricing' },
+    { to: '/pilots', label: 'Pilots' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' }
   ],
@@ -277,9 +133,57 @@ export const navLinks = {
   ]
 };
 
-export const roadmap = {
-  now: 'PR Pulse is live for Azure DevOps pull request operations. Treefold and Tagfold, two free Azure DevOps extensions, are coming soon to the Visual Studio Marketplace.',
-  next: 'Planned sequence: Foundation → PR Pulse Pro → Company Verify. Future products move forward through explicit validation gates.'
+export const companyStats = [
+  { value: '1', label: 'Live product', detail: 'PR Pulse on Azure DevOps' },
+  { value: '1', label: 'Public desktop app', detail: 'Voice Composer in development' },
+  { value: '3', label: 'Business solutions', detail: 'Engineering & verification tracks' }
+];
+
+export const featuredProducts = [
+  {
+    key: 'pr-pulse',
+    to: '/products/pulse',
+    title: 'PR Pulse',
+    subtitle: 'Pull Request Operations',
+    description: 'Live multi-repository pull request visibility with personal execution views and team workload signals.',
+    stage: 'Live',
+    track: 'Engineering',
+    platform: 'Azure DevOps',
+    ctaLabel: 'View PR Pulse',
+    externalHref: 'https://marketplace.visualstudio.com/items?itemName=bacumi.pr-pulse'
+  },
+  {
+    key: 'voice-composer',
+    to: '/products/desktop-apps',
+    title: 'Voice Composer',
+    subtitle: 'Local Dictation & Speech Intelligence',
+    description: 'A focused dictation utility being developed as part of the Bacumi Mac app portfolio.',
+    stage: 'In Development',
+    track: 'Local AI',
+    platform: 'Desktop',
+    ctaLabel: 'Learn more',
+    docsTo: '/docs/voice-composer'
+  }
+];
+
+export const navProductMenu = {
+  business: {
+    title: 'Business Software',
+    to: '/products/business-software',
+    items: solutions.map(({ key, to, title, subtitle, stage }) => ({ key, to, title, subtitle, stage }))
+  },
+  desktop: {
+    title: 'Desktop Apps',
+    to: '/products/desktop-apps',
+    items: [
+      { key: 'voice-composer', to: '/products/desktop-apps', title: 'Voice Composer', subtitle: 'Local dictation', docsTo: '/docs/voice-composer' }
+    ]
+  },
+  resources: [
+    { to: '/docs', title: 'Documentation hub', subtitle: 'All product guides' },
+    { to: '/docs/pr-pulse', title: 'PR Pulse docs', subtitle: 'Azure DevOps extension' },
+    { to: '/docs/voice-composer', title: 'Voice Composer docs', subtitle: 'Desktop dictation app' }
+  ]
 };
 
 export const contacts = {
